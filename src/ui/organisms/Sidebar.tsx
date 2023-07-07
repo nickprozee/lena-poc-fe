@@ -7,7 +7,7 @@ import { List } from "@mui/material";
 
 export function SideBarOrganism() {
     const sessions = useSelector((state: any) => state.sessions.data);
-debugger;
+
     return <Container direction="vertical" sx={{ width: '100%', height: '100vh' }}>
         <Container centered sx={{ mt: 2 }}>
             <Text size="subtitle" value="LeNa" />
