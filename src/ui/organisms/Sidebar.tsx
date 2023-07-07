@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { getAsset } from "../../utils/assetHelper";
 import { Image, Container, Text } from '../atoms';
 import { SessionListItem } from "../molecules";
@@ -5,6 +6,8 @@ import { SessionListItem } from "../molecules";
 import { List } from "@mui/material";
 
 export function SideBarOrganism() {
+    const sessions = useSelector((state: any) => state.sessions.data);
+debugger;
     return <Container direction="vertical" sx={{ width: '100%', height: '100vh' }}>
         <Container centered sx={{ mt: 2 }}>
             <Text size="subtitle" value="LeNa" />
@@ -16,7 +19,7 @@ export function SideBarOrganism() {
 
         <List>
             {
-                [1, 2, 3].map(i => <SessionListItem title={`POC Sessie ${i}`} selected={i === 1} />)
+                sessions.map((session:any, index: number) => <SessionListItem title={session.title} selected={index === 0} />)
             }
 
         </List>
