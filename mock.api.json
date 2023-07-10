@@ -1,3 +1,16 @@
 {
-    "investigations": {}
+  "create": {
+    "id": 10
+  },
+  "upload": [
+    {
+      "id": 10
+    }
+  ],
+  "summarize": [
+    {
+      "id": 10,
+      "summary": "Hello World!"
+    }
+  ]
 }

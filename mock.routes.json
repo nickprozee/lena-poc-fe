@@ -1,5 +1,5 @@
 {
-    "/investigations/:id/summarize": "/investigations/:id/summarize",
-    "/investigations/:id/upload": "/investigations/:id/upload",
-    "/investigations/create": "/investigations/create"
+    "/investigations/:id/summarize": "/summarize/:id",
+    "/investigations/:id/upload": "/upload/:id",
+    "/investigations/create": "/create"
 }
