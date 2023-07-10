@@ -36,7 +36,7 @@ export function SideBarOrganism() {
             </Container>
 
             <List>
-                <ListItemButton onClick={onAdd}>
+                <ListItemButton selected={!investigations.viewId} onClick={onAdd}>
                     <HiddenUpload getRef={r => ref.current = r} onUpload={(f) => f && dispatch(createInvestigation(f))} />
                     <ListItemText>Voeg bestand(en) toe</ListItemText>
                 </ListItemButton>

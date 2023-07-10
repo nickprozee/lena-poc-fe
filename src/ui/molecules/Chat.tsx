@@ -1,3 +1,5 @@
+import { Container } from "../atoms";
+
 export function Chat() {
-    return <>Chat hier</>
+    return <Container centered sx={{background: '#eee', height: '100vh'}}>Chat hier</Container>
 }
