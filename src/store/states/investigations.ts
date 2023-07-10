@@ -70,5 +70,5 @@ export const investigationsSlice = createSlice({
     },
 })
 
-export { createInvestigation as startInvestigation, fetchInvestigation }
+export { createInvestigation, fetchInvestigation }
 export default investigationsSlice.reducer
