@@ -3,7 +3,8 @@ import { getAsset } from '../../utils/assetHelper'
 import { Image, Container, Text } from '../atoms'
 import { InvestigationListItem } from '../molecules'
 
-import { List, ListItemButton, ListItemText } from '@mui/material'
+import { List, ListItemButton } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add';
 import { InvestigationViewModel } from '../../types/Investigations'
 import {
     clearViewId,
@@ -37,12 +38,14 @@ export function SideBarOrganism() {
 
             <List>
                 <ListItemButton selected={!investigations.viewId} onClick={onAdd}>
+                    <AddIcon color='success' sx={{mr: 1}} />
                     <HiddenUpload getRef={r => ref.current = r} onUpload={(f) => f && dispatch(createInvestigation(f))} />
-                    <ListItemText>Voeg bestand(en) toe</ListItemText>
+                    <Text size='subtitle' bold value='Voeg bestand(en) toe' />
                 </ListItemButton>
                 {investigations.data.map(
                     (investigation: InvestigationViewModel) => (
                         <InvestigationListItem
+                            processed={!!investigation.summary}
                             key={investigation.id}
                             text={investigation.title}
                             id={investigation.id}

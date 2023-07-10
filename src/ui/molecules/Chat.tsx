@@ -1,5 +1,6 @@
 import { InvestigationViewModel } from '../../types/Investigations'
-import { Container, Text } from '../atoms'
+import { getAsset } from '../../utils/assetHelper'
+import { Container, Text, Image } from '../atoms'
 
 interface Props {
     investigation: InvestigationViewModel
@@ -13,7 +14,8 @@ export function Chat(props: Props) {
             <Text size="title" value={title} bold />
             <Text size="subtitle" value={state} />
 
-            <Text size="content" value={summary ?? "..."} />
+            {summary && <Text size="content" value={summary} />}
+            {!summary && <Image src={getAsset('document_scan.gif')} sx={{maxWidth: 200}} />}
         </Container>
     )
 }

@@ -3,6 +3,8 @@ import { InvestigationViewModel } from '../../types/Investigations'
 import { investigationsApi } from '../../api/investigations'
 import { RootState } from '..'
 
+let interval: any;
+
 interface State {
     data: InvestigationViewModel[]
     viewId?: string
@@ -41,14 +43,17 @@ const fetchInvestigation = createAsyncThunk(
 
         //@ts-expect-error
         const state: State = thunkApi.getState().investigations
-        const investigation = state.data.find((i) => i.id === id)
+        let investigation = state.data.find((i) => i.id === id)
 
         if (!investigation) return
 
-        investigation.summary = response.summary
-        investigation.state = 'PROCESSED'
         thunkApi.dispatch(
-            investigationsSlice.actions.updateInvestigation(investigation)
+            investigationsSlice.actions.updateInvestigation({
+                id, 
+                state: 'PROCESSED',
+                title: investigation.title,
+                summary: response.summary
+            })
         )
     }
 )
@@ -68,6 +73,7 @@ export const investigationsSlice = createSlice({
             state,
             action: PayloadAction<InvestigationViewModel>
         ) => {
+            debugger;
             const index = state.data.findIndex(
                 (inv) => inv.id === action.payload.id
             )
