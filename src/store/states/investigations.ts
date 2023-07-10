@@ -4,22 +4,25 @@ import { investigationsApi } from '../../api/investigations'
 
 interface State {
     data: InvestigationViewModel[]
+    viewId?: string
 }
 
 const initialState: State = {
-    data: []
+    data: [],
 }
 
 const createInvestigation = createAsyncThunk(
     'investigations/start',
     async (args: File, thunkApi) => {
-        const { id } = await investigationsApi.create();
+        const { id } = await investigationsApi.create()
 
-        thunkApi.dispatch(investigationsSlice.actions.addInvestigation({
-            id,
-            title: args.name,
-            state: 'PROCESSING',
-        }));
+        thunkApi.dispatch(
+            investigationsSlice.actions.addInvestigation({
+                id,
+                title: args.name,
+                state: 'PROCESSING',
+            })
+        )
 
         await investigationsApi.uploadDocument(id, args)
         await investigationsApi.summarize(id)
@@ -40,7 +43,9 @@ const fetchInvestigation = createAsyncThunk(
 
         investigation.summary = response.summary
         investigation.state = 'PROCESSED'
-        thunkApi.dispatch(investigationsSlice.actions.updateInvestigation(investigation));
+        thunkApi.dispatch(
+            investigationsSlice.actions.updateInvestigation(investigation)
+        )
     }
 )
 
@@ -66,6 +71,14 @@ export const investigationsSlice = createSlice({
             if (index === -1) return
 
             state.data[index] = action.payload
+        },
+
+        clearViewId: (state) => {
+            state.viewId = undefined;
+        },
+        
+        setViewId: (state, action: PayloadAction<string>) => {
+            state.viewId = action.payload
         },
     },
 })
