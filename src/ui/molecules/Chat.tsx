@@ -37,28 +37,28 @@ export function Chat() {
                         img: { objectFit: 'fill' },
                     }}
                 />
-                <Paper
-                    elevation={1}
-                    sx={{
-                        background: '#fff',
-                        padding: '2rem',
-                        borderRadius: '2rem 2rem 2rem 0',
-                        width: '100%',
-                    }}>
-                    <Text
-                        size="title"
-                        bold
-                        color={theme.palette.primary.main}
-                        value={investigation ? investigation.title : ''}
-                    />
-                    <Text
-                        size="content"
-                        color="#000"
-                        value={
-                            investigation?.summary ? investigation.summary : ''
-                        }
-                    />
-                </Paper>
+                {investigation?.summary && (
+                    <Paper
+                        elevation={1}
+                        sx={{
+                            background: '#fff',
+                            padding: '2rem',
+                            borderRadius: '2rem 2rem 2rem 0',
+                            width: '100%',
+                        }}>
+                        <Text
+                            size="title"
+                            bold
+                            color={theme.palette.primary.main}
+                            value={investigation.title}
+                        />
+                        <Text
+                            size="content"
+                            color="#000"
+                            value={investigation.summary}
+                        />
+                    </Paper>
+                )}
             </Container>
         </Container>
     )
