@@ -1,5 +1,19 @@
-import { Container } from "../atoms";
+import { InvestigationViewModel } from '../../types/Investigations'
+import { Container, Text } from '../atoms'
 
-export function Chat() {
-    return <Container centered sx={{background: '#eee', height: '100vh'}}>Chat hier</Container>
+interface Props {
+    investigation: InvestigationViewModel
+}
+
+export function Chat(props: Props) {
+    const { state, title, summary } = props.investigation
+
+    return (
+        <Container centered sx={{ background: '#eee', height: '100vh' }}>
+            <Text size="title" value={title} bold />
+            <Text size="subtitle" value={state} />
+
+            <Text size="content" value={summary ?? "..."} />
+        </Container>
+    )
 }
