@@ -4,6 +4,7 @@ interface Props {
     size: 'content' | 'subtitle' | 'title'
     value: string
     bold?: boolean
+    color?: string
 }
 
 const SIZES = {
@@ -18,7 +19,7 @@ export function Text(props: Props) {
     //@ts-expect-error
     return (
         <Typography
-            color={'primary'}
+            color={props.color}
             fontWeight={props.bold ? 'bold' : 'initial'}
             variant={size}>
             {props.value}
