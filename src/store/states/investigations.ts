@@ -1,24 +1,32 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { InvestigationViewModel } from '../../types/Investigations'
 
 interface State {
-    data: {
-        title: string
-    }[]
+    data: InvestigationViewModel[]
+    state: 'fetching' | 'finished'
 }
+
 const initialState: State = {
-    data: [
-        { title: 'Investigation 10' },
-        { title: 'Investigation 20' },
-        { title: 'Investigation 30' },
-    ],
+    state: 'finished',
+    data: [],
 }
+
+const startInvestigation = createAsyncThunk(
+    'investigations/start',
+    async (args: File, thunkApi) => {
+
+    }
+)
 
 export const investigationsSlice = createSlice({
     name: 'investigations',
     initialState,
     reducers: {
-        addInvestigation: (state, action: PayloadAction<string>) => {
-            state.data.push({ title: action.payload })
+        addInvestigation: (
+            state,
+            action: PayloadAction<InvestigationViewModel>
+        ) => {
+            state.data.push(action.payload)
         },
     },
 })
