@@ -4,7 +4,7 @@ interface Investigation {
 
 interface InvestigationViewModel extends Investigation {
     title: string
-    state: 'PROCESSING' | 'PROCESSED',
+    state: 'CREATED' | 'PROCESSING' | 'PROCESSED',
     summary?: string
 }
 

@@ -1,12 +1,23 @@
 {
-  "create": {
-    "id": 10
-  },
+  "investigations": [
+    {
+      "id": 5001,
+      "status": "CREATED"
+    },
+    {
+      "id": 5002,
+      "status": "CREATED"
+    }
+  ],
   "upload": {},
   "summarize": [
     {
-      "id": 10,
-      "summary": "Hello World!"
+      "id": 5001,
+      "summary": "Hello World! 5001"
+    },
+    {
+      "id": 5002,
+      "summary": "Hello World! 5002"
     }
   ]
 }

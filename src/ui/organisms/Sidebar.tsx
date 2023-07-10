@@ -32,6 +32,7 @@ export function SideBarOrganism() {
                 {investigations.data.map(
                     (investigation: InvestigationViewModel) => (
                         <InvestigationListItem
+                            text={investigation.title}
                             id={investigation.id}
                             selected={
                                 investigation.id === investigations.viewId
