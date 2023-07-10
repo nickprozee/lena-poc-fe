@@ -1,2 +1,2 @@
-export {DocumentUpload} from './DocumentUpload';
-export {SessionListItem} from './SessionListItem';
+export { DocumentUpload } from './DocumentUpload'
+export { InvestigationListItem } from './InvestigationListItem'

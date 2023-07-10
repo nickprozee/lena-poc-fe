@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
-import sessionsReducer from './states/sessions';
+import { configureStore } from '@reduxjs/toolkit'
+import investigationsReducer from './states/investigations'
 
 export default configureStore({
-  reducer: {
-    sessions: sessionsReducer
-  },
+    reducer: {
+        investigations: investigationsReducer,
+    },
 })
