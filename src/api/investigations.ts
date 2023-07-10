@@ -21,7 +21,8 @@ class Api extends BaseClient {
     }
 
     summarize = async (id: string): Promise<Summary | undefined> => {
-        const { json } = await this.api<Summary>('summarize', id, 'GET')
+        const { json } = await this.api<Summary>('summarize', id, 'GET');
+
         return json
     }
 

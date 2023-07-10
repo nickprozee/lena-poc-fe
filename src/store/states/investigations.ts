@@ -4,43 +4,43 @@ import { investigationsApi } from '../../api/investigations'
 
 interface State {
     data: InvestigationViewModel[]
-    state: 'fetching' | 'finished'
 }
 
 const initialState: State = {
-    state: 'finished',
-    data: [],
+    data: []
 }
 
-const startInvestigation = createAsyncThunk(
+const createInvestigation = createAsyncThunk(
     'investigations/start',
     async (args: File, thunkApi) => {
-        const { id } = await investigationsApi.create()
+        const { id } = await investigationsApi.create();
+
+        thunkApi.dispatch(investigationsSlice.actions.addInvestigation({
+            id,
+            title: args.name,
+            state: 'PROCESSING',
+        }));
+
         await investigationsApi.uploadDocument(id, args)
         await investigationsApi.summarize(id)
-
-        thunkApi.dispatch(
-            investigationsSlice.actions.addInvestigation({
-                id,
-                state: 'PROCESSING',
-                title: args.name,
-            })
-        )
     }
 )
 
 const fetchInvestigation = createAsyncThunk(
     'investigations/fetch',
-    async (args: string, thunkApi) => {
-            const response = await investigationsApi.summarize(args)
-            if (!response?.summary) return
+    async (id: string, thunkApi) => {
+        const response = await investigationsApi.summarize(id)
+        if (!response?.summary) return
 
-            //@ts-expect-error
-            const state: State = thunkApi.getState().investigations;
-            const investigation = state.data.find(i => i.id === args);
+        //@ts-expect-error
+        const state: State = thunkApi.getState().investigations
+        const investigation = state.data.find((i) => i.id === id)
 
-            investigation!.summary = response.summary;
-            investigation!.state = 'PROCESSED';
+        if (!investigation) return
+
+        investigation.summary = response.summary
+        investigation.state = 'PROCESSED'
+        thunkApi.dispatch(investigationsSlice.actions.updateInvestigation(investigation));
     }
 )
 
@@ -70,5 +70,5 @@ export const investigationsSlice = createSlice({
     },
 })
 
-export { startInvestigation, fetchInvestigation }
+export { createInvestigation as startInvestigation, fetchInvestigation }
 export default investigationsSlice.reducer

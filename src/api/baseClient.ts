@@ -45,9 +45,6 @@ export abstract class BaseClient {
     protected handleResponse = async <T>(
         response: Response
     ): Promise<{ response: Response; json?: T; headers: Headers }> => {
-        console.log('=====> RESPONSE', response)
-        console.log('=====> HEADERS', response.headers)
-
         if (!response.ok)
             throw Error(ResponseCodesFactory.create(response.status))
 
