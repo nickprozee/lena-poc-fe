@@ -2,11 +2,7 @@
   "create": {
     "id": 10
   },
-  "upload": [
-    {
-      "id": 10
-    }
-  ],
+  "upload": {},
   "summarize": [
     {
       "id": 10,
