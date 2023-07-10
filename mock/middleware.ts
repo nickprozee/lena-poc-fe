@@ -27,9 +27,8 @@ module.exports = function (req, res, next) {
 
         if (!summarize_processed) {
             summarize_processed = !summarize_processed
-            return ProcessingSummarize();
+            return ProcessingSummarize()
         }
-
     }
 
     console.log(req)
