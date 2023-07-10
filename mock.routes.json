@@ -1,0 +1,5 @@
+{
+    "/investigations/:id/summarize": "/investigations/:id/summarize",
+    "/investigations/:id/upload": "/investigations/:id/upload",
+    "/investigations/create": "/investigations/create"
+}

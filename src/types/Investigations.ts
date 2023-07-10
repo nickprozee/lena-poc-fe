@@ -1,9 +1,4 @@
-interface Investigation {
-    investigation_id: string
-    title: string
-    value: string
-    created_at: string
-    updated_at?: string
-}
+interface Investigation { id: string }
+interface InvestigationViewModel extends Investigation { title: string; }
 
-export type { Investigation }
+export type { Investigation, InvestigationViewModel }
