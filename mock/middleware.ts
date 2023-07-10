@@ -12,7 +12,7 @@ module.exports = function (req, res, next) {
         res.status(202).send()
     }
 
-    if (req.path === '/create') {
+    if (PATH === '/create') {
         if (METHOD !== 'POST') return MethodNotAllowed()
 
         req.method = 'GET'
