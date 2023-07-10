@@ -2,13 +2,21 @@ import { FileUploader } from 'react-drag-drop-files'
 import { Container } from '../atoms/Container'
 import { Text } from '../atoms/Text'
 
-interface Props
+interface Props {
+    onUpload: (f: File) => any
+}
+
+interface HiddenProps
 {
+    getRef: (r: HTMLInputElement | null) => any;
     onUpload: (f: File) => any;
 }
 
-export function DocumentUploadMolecule(props:Props) {
+export function HiddenUpload(props: HiddenProps) {
+    return <input type="file" style={{ display: 'none' }} ref={props.getRef} onChange={e => props.onUpload(e.target.files![0])} />
+}
 
+export function DocumentUploadMolecule(props: Props) {
     return (
         <FileUploader multiple={false} handleChange={props.onUpload}>
             <Container

@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { getAsset } from '../../utils/assetHelper'
 import { Image, Container, Text } from '../atoms'
 import { InvestigationListItem } from '../molecules'
@@ -7,13 +7,23 @@ import { List, ListItemButton, ListItemText } from '@mui/material'
 import { InvestigationViewModel } from '../../types/Investigations'
 import {
     clearViewId,
+    createInvestigation,
     selectInvestigations,
     setViewId,
 } from '../../store/states/investigations'
+import { HiddenUpload } from '../molecules/DocumentUpload'
+import { useAppDispatch } from '../../store'
+import { useRef } from 'react'
 
 export function SideBarOrganism() {
     const investigations = useSelector(selectInvestigations)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch();
+    const ref = useRef<HTMLInputElement | null>();
+
+    const onAdd = () => {
+        dispatch(clearViewId());
+        ref.current?.click();
+    }
 
     return (
         <Container direction="vertical" sx={{ width: '100%', height: '100vh' }}>
@@ -26,12 +36,14 @@ export function SideBarOrganism() {
             </Container>
 
             <List>
-                <ListItemButton onClick={() => dispatch(clearViewId())}>
+                <ListItemButton onClick={onAdd}>
+                    <HiddenUpload getRef={r => ref.current = r} onUpload={(f) => f && dispatch(createInvestigation(f))} />
                     <ListItemText>Voeg bestand(en) toe</ListItemText>
                 </ListItemButton>
                 {investigations.data.map(
                     (investigation: InvestigationViewModel) => (
                         <InvestigationListItem
+                            key={investigation.id}
                             text={investigation.title}
                             id={investigation.id}
                             selected={
