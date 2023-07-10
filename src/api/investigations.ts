@@ -2,11 +2,11 @@ import { Investigation } from '../types/Investigations'
 import { Summary } from '../types/Summary'
 import { BaseClient } from './baseClient'
 
-export class InvestigationsApi extends BaseClient {
+class Api extends BaseClient {
     constructor() {
         super(
             new Headers({
-                'Content-type': 'application/json',
+                'Content-type': 'application/json'
             }),
             process.env.REACT_APP_INVESTIGATIONS_API as string
         )
@@ -34,3 +34,6 @@ export class InvestigationsApi extends BaseClient {
         return json as Investigation
     }
 }
+
+//Singleton pattern
+export const investigationsApi = new Api();
