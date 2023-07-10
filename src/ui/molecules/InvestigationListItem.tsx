@@ -11,7 +11,7 @@ interface Props {
 export function InvestigationListItem(props: Props) {
     return (
         <>
-            <ListItemButton onClick={props.onClick}>
+            <ListItemButton selected={props.selected} onClick={props.onClick}>
                 <Text size="subtitle" bold={props.selected} value={props.text ?? props.id} />
             </ListItemButton>
             <Divider />

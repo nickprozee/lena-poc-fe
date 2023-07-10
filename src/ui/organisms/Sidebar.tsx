@@ -37,6 +37,7 @@ export function SideBarOrganism() {
 
             <List>
                 <ListItemButton
+                    selected={!investigations.viewId}
                     onClick={onAdd}
                     sx={{
                         border: '.1rem solid #eee',
