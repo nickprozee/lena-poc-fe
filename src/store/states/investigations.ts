@@ -24,9 +24,7 @@ const createInvestigation = createAsyncThunk(
             })
         )
 
-        thunkApi.dispatch(
-            investigationsSlice.actions.setViewId(id)
-        );
+        thunkApi.dispatch(investigationsSlice.actions.setViewId(id))
 
         await investigationsApi.uploadDocument(id, args)
         await investigationsApi.summarize(id)
@@ -78,7 +76,7 @@ export const investigationsSlice = createSlice({
         },
 
         clearViewId: (state) => {
-            state.viewId = undefined;
+            state.viewId = undefined
         },
 
         setViewId: (state, action: PayloadAction<string>) => {
@@ -88,4 +86,6 @@ export const investigationsSlice = createSlice({
 })
 
 export { createInvestigation, fetchInvestigation }
+export const { setViewId } = investigationsSlice.actions
+
 export default investigationsSlice.reducer
