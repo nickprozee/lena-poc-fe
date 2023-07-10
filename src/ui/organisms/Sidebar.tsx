@@ -1,14 +1,19 @@
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { getAsset } from '../../utils/assetHelper'
 import { Image, Container, Text } from '../atoms'
 import { InvestigationListItem } from '../molecules'
 
-import { List } from '@mui/material'
+import { List, ListItemButton, ListItemText } from '@mui/material'
+import { InvestigationViewModel } from '../../types/Investigations'
+import {
+    clearViewId,
+    selectInvestigations,
+    setViewId,
+} from '../../store/states/investigations'
 
 export function SideBarOrganism() {
-    const investigations = useSelector(
-        (state: any) => state.investigations.data
-    )
+    const investigations = useSelector(selectInvestigations)
+    const dispatch = useDispatch()
 
     return (
         <Container direction="vertical" sx={{ width: '100%', height: '100vh' }}>
@@ -21,12 +26,22 @@ export function SideBarOrganism() {
             </Container>
 
             <List>
-                {investigations.map((investigation: any, index: number) => (
-                    <InvestigationListItem
-                        title={investigation.title}
-                        selected={index === 0}
-                    />
-                ))}
+                <ListItemButton onClick={() => dispatch(clearViewId())}>
+                    <ListItemText>Voeg bestand(en) toe</ListItemText>
+                </ListItemButton>
+                {investigations.data.map(
+                    (investigation: InvestigationViewModel) => (
+                        <InvestigationListItem
+                            id={investigation.id}
+                            selected={
+                                investigation.id === investigations.viewId
+                            }
+                            onClick={() =>
+                                dispatch(setViewId(investigation.id))
+                            }
+                        />
+                    )
+                )}
             </List>
         </Container>
     )

@@ -1,21 +1,18 @@
-import { Divider, ListItem } from '@mui/material'
+import { Divider, ListItemButton } from '@mui/material'
 import { Text } from '../atoms'
 
 interface Props {
     selected?: boolean
-    title: string
+    onClick: () => any
+    id: string
 }
 
 export function InvestigationListItem(props: Props) {
     return (
         <>
-            <ListItem>
-                <Text
-                    size="subtitle"
-                    bold={props.selected}
-                    value={props.title}
-                />
-            </ListItem>
+            <ListItemButton onClick={props.onClick}>
+                <Text size="subtitle" bold={props.selected} value={props.id} />
+            </ListItemButton>
             <Divider />
         </>
     )

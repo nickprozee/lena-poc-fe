@@ -1,6 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { InvestigationViewModel } from '../../types/Investigations'
 import { investigationsApi } from '../../api/investigations'
+import { RootState } from '..'
 
 interface State {
     data: InvestigationViewModel[]
@@ -86,6 +87,7 @@ export const investigationsSlice = createSlice({
 })
 
 export { createInvestigation, fetchInvestigation }
-export const { setViewId } = investigationsSlice.actions
-
+export const { setViewId, clearViewId } = investigationsSlice.actions
+export const selectInvestigations = (state: RootState): State =>
+    state.investigations
 export default investigationsSlice.reducer
