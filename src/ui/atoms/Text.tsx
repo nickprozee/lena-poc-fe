@@ -15,11 +15,16 @@ const SIZES = {
 export function Text(props: Props) {
     const size = SIZES[props.size]
 
-    //@ts-expect-error
     return (
         <Typography
             color={'primary'}
+            sx={{
+                maxWidth: '100%',
+                overflow: 'hidden'
+            }}            
+            textOverflow={'ellipsis'}
             fontWeight={props.bold ? 'bold' : 'initial'}
+            //@ts-expect-error
             variant={size}>
             {props.value}
         </Typography>

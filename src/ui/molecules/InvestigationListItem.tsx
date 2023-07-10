@@ -1,7 +1,7 @@
 import { Divider, ListItemButton } from '@mui/material'
 import { Text } from '../atoms'
-import DocIcon from '@mui/icons-material/DocumentScanner'
-import CompletedIcon from '@mui/icons-material/Task'
+import DocIcon from '@mui/icons-material/DocumentScannerOutlined'
+import CompletedIcon from '@mui/icons-material/TaskOutlined'
 
 interface Props {
     text?: string

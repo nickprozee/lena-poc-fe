@@ -3,8 +3,6 @@ import { InvestigationViewModel } from '../../types/Investigations'
 import { investigationsApi } from '../../api/investigations'
 import { RootState } from '..'
 
-let interval: any;
-
 interface State {
     data: InvestigationViewModel[]
     viewId?: string
@@ -73,7 +71,7 @@ export const investigationsSlice = createSlice({
             state,
             action: PayloadAction<InvestigationViewModel>
         ) => {
-            debugger;
+            
             const index = state.data.findIndex(
                 (inv) => inv.id === action.payload.id
             )

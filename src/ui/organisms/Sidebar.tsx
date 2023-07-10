@@ -3,8 +3,8 @@ import { getAsset } from '../../utils/assetHelper'
 import { Image, Container, Text } from '../atoms'
 import { InvestigationListItem } from '../molecules'
 
-import { List, ListItemButton } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add';
+import { Divider, List, ListItemButton } from '@mui/material'
+import AddIcon from '@mui/icons-material/FileUploadOutlined'
 import { InvestigationViewModel } from '../../types/Investigations'
 import {
     clearViewId,
@@ -12,36 +12,67 @@ import {
     selectInvestigations,
     setViewId,
 } from '../../store/states/investigations'
-import { HiddenUpload } from '../molecules/DocumentUpload'
+import { UploadArea } from '../molecules/DocumentUpload'
 import { useAppDispatch } from '../../store'
 import { useRef } from 'react'
 
 export function SideBarOrganism() {
     const investigations = useSelector(selectInvestigations)
-    const dispatch = useAppDispatch();
-    const ref = useRef<HTMLInputElement | null>();
+    const dispatch = useAppDispatch()
+    const ref = useRef<HTMLInputElement | null>()
 
     const onAdd = () => {
-        dispatch(clearViewId());
-        ref.current?.click();
+        dispatch(clearViewId())
+        ref.current?.click()
     }
 
     return (
-        <Container direction="vertical" sx={{ width: '100%', height: '100vh' }}>
-            <Container centered sx={{ mt: 2 }}>
-                <Text size="subtitle" value="LeNa" />
-            </Container>
-            <Image src={getAsset('logo_politie.svg')} />
-            <Container centered>
-                <Text size="subtitle" value="Bestanden" />
+        <Container
+            direction="vertical"
+            sx={{
+                width: 300,
+                height: '100vh',
+                pt: 1,
+                mt: 1,
+                background: '#fff',
+                borderTopRightRadius: 30,
+                filter: 'drop-shadow(-5px 10px 15px gray)',
+                zIndex: 10,
+                overflow: 'hidden'
+            }}>
+            <Image
+                src={getAsset('logo_politie.svg')}
+                sx={{
+                    maxWidth: 100,
+                    filter: 'drop-shadow(5px 5px 10px #4444dd)',
+                }}
+            />
+            <Container centered sx={{ mb: 2, mt: 1 }}>
+                <Text size="subtitle" value="LENA" bold />
             </Container>
 
-            <List>
-                <ListItemButton selected={!investigations.viewId} onClick={onAdd}>
-                    <AddIcon color='success' sx={{mr: 1}} />
-                    <HiddenUpload getRef={r => ref.current = r} onUpload={(f) => f && dispatch(createInvestigation(f))} />
-                    <Text size='subtitle' bold value='Voeg bestand(en) toe' />
-                </ListItemButton>
+            <Divider />
+
+            <List sx={{ pt: 0 }}>
+                <UploadArea
+                    onUpload={(f) => f && dispatch(createInvestigation(f))}>
+                    <ListItemButton
+                        sx={{ p: 0, width: '100%' }}
+                        selected={!investigations.viewId}
+                        onClick={onAdd}>
+                        <Container
+                            direction="horizontal"
+                            sx={{ py: 3, px: 2, width: '100%' }}>
+                            <AddIcon color="success" sx={{ mr: 1 }} />
+                            <Text
+                                size="subtitle"
+                                bold
+                                value="Voeg bestand(en) toe"
+                            />
+                        </Container>
+                    </ListItemButton>
+                </UploadArea>
+                <Divider />
                 {investigations.data.map(
                     (investigation: InvestigationViewModel) => (
                         <InvestigationListItem

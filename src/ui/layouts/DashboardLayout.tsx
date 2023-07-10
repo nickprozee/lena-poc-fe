@@ -14,6 +14,7 @@ export function DashboardLayout(props: Props) {
             direction="horizontal"
             sx={{
                 height: '100vh',
+                background: '#eee'
             }}>
             {/** SideBar */}
             <Container
