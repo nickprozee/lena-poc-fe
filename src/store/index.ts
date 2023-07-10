@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux'
 
 export const store = configureStore({
     reducer: {
-        investigations: investigationsReducer,
-    },
+        investigations: investigationsReducer
+    }
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

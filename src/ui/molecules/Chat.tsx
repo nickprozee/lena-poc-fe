@@ -10,7 +10,7 @@ export function Chat(props: Props) {
     const { state, title, summary } = props.investigation
 
     return (
-        <Container centered sx={{ background: '#eee', height: '100vh' }}>
+        <Container centered sx={{ height: '100vh' }}>
             <Text size="title" value={title} bold />
             <Text size="title" value={state} />
 

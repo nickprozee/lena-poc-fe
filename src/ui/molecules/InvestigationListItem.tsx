@@ -1,7 +1,6 @@
-import { Divider, ListItemButton } from '@mui/material'
+import { CircularProgress, ListItemButton } from '@mui/material'
 import { Text } from '../atoms'
-import DocIcon from '@mui/icons-material/DocumentScannerOutlined'
-import CompletedIcon from '@mui/icons-material/TaskOutlined'
+import CompletedIcon from '@mui/icons-material/DocumentScannerTwoTone'
 
 interface Props {
     text?: string
@@ -14,18 +13,17 @@ interface Props {
 export function InvestigationListItem(props: Props) {
     return (
         <>
-            <ListItemButton selected={props.selected} onClick={props.onClick}>
+            <ListItemButton
+                selected={props.selected}
+                onClick={props.onClick}
+                sx={{ borderRadius: 3, py: 2 }}>
                 {props.processed ? (
-                    <CompletedIcon color="success" sx={{ mr: 1 }} />
+                    <CompletedIcon color="primary" sx={{ mr: 1 }} />
                 ) : (
-                    <DocIcon color="info" sx={{ mr: 1 }} />
+                    <CircularProgress size={'1rem'} sx={{ mr: 1 }} />
                 )}
-                <Text
-                    size="subtitle"
-                    value={props.text ?? props.id}
-                />
+                <Text size="subtitle" value={props.text ?? props.id} />
             </ListItemButton>
-            <Divider />
         </>
     )
 }
