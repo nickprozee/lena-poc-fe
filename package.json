@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "mockapi": "json-server --watch ./mock/mock.api.json --routes ./mock/mock.routes.json --middlewares ./mock/mock.middleware.ts --port 4000"
+    "mockapi": "json-server --watch ./mock/api.json --routes ./mock/routes.json --middlewares ./mock/middleware.ts --port 4000"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
