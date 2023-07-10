@@ -1,19 +1,16 @@
-import { useDispatch } from 'react-redux'
 import { FileUploader } from 'react-drag-drop-files'
 import { Container } from '../atoms/Container'
 import { Text } from '../atoms/Text'
-import { createInvestigation } from '../../store/states/investigations'
 
-export function DocumentUpload() {
-    const dispatch = useDispatch()
+interface Props
+{
+    onUpload: (f: File) => any;
+}
 
-    const onChange = (file: File) => {
-        console.log('file name: ', file)
-        dispatch(createInvestigation(file))
-    }
+export function DocumentUploadMolecule(props:Props) {
 
     return (
-        <FileUploader multiple={false} handleChange={onChange}>
+        <FileUploader multiple={false} handleChange={props.onUpload}>
             <Container
                 centered
                 sx={{ width: '100%', height: '100vh', background: '#eee' }}>

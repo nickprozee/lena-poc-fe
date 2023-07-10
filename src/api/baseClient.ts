@@ -1,5 +1,5 @@
 import { ResponseCodesFactory } from '../factories'
-
+import { sanitizeApiEndpoint } from '../utils/stringSanitizer'
 export abstract class BaseClient {
     protected readonly _apiEndpoint: string
     private readonly _headers: Headers
@@ -24,13 +24,12 @@ export abstract class BaseClient {
             queryParams
         )
 
-        let _body = body ? JSON.stringify(body) : undefined;
-        if (controller === 'upload')
-        {
-            _body = body;
-            this._headers.delete('Content-type');
+        let _body = body ? JSON.stringify(body) : undefined
+        if (controller === 'upload') {
+            _body = body
+            this._headers.delete('Content-type')
         }
-        
+
         if (headers)
             headers.forEach((h) => this._headers.append(h.key, h.value ?? ''))
 
@@ -70,5 +69,3 @@ export abstract class BaseClient {
         }
     }
 }
-
-

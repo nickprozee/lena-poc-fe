@@ -4,13 +4,8 @@ module.exports = function (req, res, next) {
     const METHOD = req.method
     const PATH = req.path
 
-    const MethodNotAllowed = () => {
-        res.status(405).send()
-    }
-
-    const ProcessingSummarize = () => {
-        res.status(202).send()
-    }
+    const MethodNotAllowed = () => res.status(405).send()
+    const ProcessingSummarize = () => res.status(202).send()
 
     if (PATH === '/create') {
         if (METHOD !== 'POST') return MethodNotAllowed()

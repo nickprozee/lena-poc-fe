@@ -1,2 +1,2 @@
-export { DocumentUpload } from './DocumentUpload'
+export { DocumentUploadMolecule } from './DocumentUpload'
 export { InvestigationListItem } from './InvestigationListItem'

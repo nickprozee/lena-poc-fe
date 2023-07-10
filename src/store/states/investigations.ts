@@ -15,6 +15,7 @@ const initialState: State = {
 const createInvestigation = createAsyncThunk(
     'investigations/start',
     async (args: File, thunkApi) => {
+        
         const { id } = await investigationsApi.create()
 
         thunkApi.dispatch(

@@ -4,6 +4,7 @@ import { BaseClient } from './baseClient'
 
 class Api extends BaseClient {
     constructor() {
+        
         super(
             new Headers({
                 'Content-type': 'application/json'
@@ -27,6 +28,7 @@ class Api extends BaseClient {
     }
 
     create = async (): Promise<Investigation> => {
+        
         const { json } = await this.api<Investigation>(
             'create',
             undefined,
