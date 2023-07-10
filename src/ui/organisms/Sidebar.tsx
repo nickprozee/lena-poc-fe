@@ -31,64 +31,61 @@ export function SideBarOrganism() {
             direction="vertical"
             sx={{
                 width: 300,
-                height: '100vh',
+                mt: 'auto',
+                minHeight: '70vh',
                 pt: 1,
-                mt: 1,
                 background: '#fff',
                 borderTopRightRadius: 30,
-                filter: 'drop-shadow(-5px 10px 15px gray)',
+                filter: 'drop-shadow(-5px 10px 10px gray)',
                 zIndex: 10,
-                overflow: 'hidden'
+                overflow: 'hidden',
             }}>
-            <Image
-                src={getAsset('logo_politie.svg')}
-                sx={{
-                    maxWidth: 100,
-                    filter: 'drop-shadow(5px 5px 10px #4444dd)',
-                }}
-            />
-            <Container centered sx={{ mb: 2, mt: 1 }}>
-                <Text size="subtitle" value="LENA" bold />
+            <Container centered sx={{ mb: 2 }}>
+                <Image
+                    src={getAsset('logo_politie.svg')}
+                    sx={{
+                        maxWidth: 100,
+                        filter: 'drop-shadow(5px 5px 10px #4444dd)',
+                    }}
+                />
             </Container>
 
+            <UploadArea onUpload={(f) => f && dispatch(createInvestigation(f))}>
+                <ListItemButton
+                    sx={{ p: 0, width: '100%' }}
+                    selected={!investigations.viewId}
+                    onClick={onAdd}>
+                    <Container
+                        direction="horizontal"
+                        sx={{ py: 3, px: 2, width: '100%' }}>
+                        <AddIcon color="success" sx={{ mr: 1 }} />
+                        <Text
+                            size="subtitle"
+                            bold
+                            value="Voeg bestand(en) toe"
+                        />
+                    </Container>
+                </ListItemButton>
+            </UploadArea>
             <Divider />
 
-            <List sx={{ pt: 0 }}>
-                <UploadArea
-                    onUpload={(f) => f && dispatch(createInvestigation(f))}>
-                    <ListItemButton
-                        sx={{ p: 0, width: '100%' }}
-                        selected={!investigations.viewId}
-                        onClick={onAdd}>
-                        <Container
-                            direction="horizontal"
-                            sx={{ py: 3, px: 2, width: '100%' }}>
-                            <AddIcon color="success" sx={{ mr: 1 }} />
-                            <Text
-                                size="subtitle"
-                                bold
-                                value="Voeg bestand(en) toe"
+            <List sx={{ pt: 0, overflow: 'auto' }}>
+                    {investigations.data.map(
+                        (investigation: InvestigationViewModel) => (
+                            <InvestigationListItem
+                                processed={!!investigation.summary}
+                                key={investigation.id}
+                                text={investigation.title}
+                                id={investigation.id}
+                                selected={
+                                    investigation.id === investigations.viewId
+                                }
+                                onClick={() =>
+                                    dispatch(setViewId(investigation.id))
+                                }
                             />
-                        </Container>
-                    </ListItemButton>
-                </UploadArea>
-                <Divider />
-                {investigations.data.map(
-                    (investigation: InvestigationViewModel) => (
-                        <InvestigationListItem
-                            processed={!!investigation.summary}
-                            key={investigation.id}
-                            text={investigation.title}
-                            id={investigation.id}
-                            selected={
-                                investigation.id === investigations.viewId
-                            }
-                            onClick={() =>
-                                dispatch(setViewId(investigation.id))
-                            }
-                        />
-                    )
-                )}
+                        )
+                    )}
             </List>
         </Container>
     )
