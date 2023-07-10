@@ -1,0 +1,12 @@
+{
+  "create": {
+    "id": 10
+  },
+  "upload": {},
+  "summarize": [
+    {
+      "id": 10,
+      "summary": "Hello World!"
+    }
+  ]
+}
