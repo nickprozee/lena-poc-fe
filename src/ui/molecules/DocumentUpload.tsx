@@ -8,16 +8,13 @@ interface Props {
     message?: string
     onUpload: (f: File) => any
     sx?: SxProps<Theme>
+    children?: React.ReactNode
+    fileTypes?: string[]
 }
 
-interface HiddenProps {
-    onUpload: (f: File) => any
-    children: React.ReactNode
-}
-
-export function UploadArea(props: HiddenProps) {
+export function UploadArea(props: Props) {
     return (
-        <FileUploader multiple={false} handleChange={props.onUpload} types={['DOCX', 'PDF']}>
+        <FileUploader multiple={false} handleChange={props.onUpload} types={props.fileTypes}>
             {props.children}
         </FileUploader>
     )
@@ -25,7 +22,7 @@ export function UploadArea(props: HiddenProps) {
 
 export function DocumentUploadMolecule(props: Props) {
     return (
-        <UploadArea onUpload={props.onUpload}>
+        <UploadArea {...props}>
             <ListItemButton sx={{ p: 0, borderRadius: 3, background: '#eee' }}>
                 <Container
                     direction="horizontal"
