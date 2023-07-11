@@ -7,7 +7,7 @@ import { theme } from '../theme'
 
 interface Props {
     message?: string
-    onUpload: (f: File) => void
+    onUpload: (files: File[]) => any
     sx?: SxProps<Theme>
     children?: React.ReactNode
     fileTypes?: string[]
@@ -15,14 +15,12 @@ interface Props {
 
 export function UploadArea(props: Props) {
     return (
-        <Container sx={{ label: { ':focus-within': { outline: 'none' } } }}>
-            <FileUploader
-                multiple={false}
-                handleChange={props.onUpload}
-                types={props.fileTypes}>
-                {props.children}
-            </FileUploader>
-        </Container>
+        <FileUploader
+            multiple={true}
+            handleChange={props.onUpload}
+            types={props.fileTypes}>
+            {props.children}
+        </FileUploader>
     )
 }
 

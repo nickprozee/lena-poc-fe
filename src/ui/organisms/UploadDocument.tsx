@@ -6,12 +6,14 @@ import { theme } from '../theme'
 
 export function UploadDocumentOrganism() {
     const dispatch = useAppDispatch()
-    const uploadFile = (f: File) => dispatch(createInvestigation(f))
+    const uploadFiles = (files: File[]) => dispatch(createInvestigation(files))
+
     return (
         <Container centered sx={{ height: '100vh' }}>
             <DocumentUploadMolecule
                 fileTypes={['DOCX', 'PDF']}
                 message="Klik hier of sleep uw documenten(en)"
+                onUpload={uploadFiles}
                 sx={{
                     background: theme.palette.common.white,
                     borderRadius: 2,
@@ -25,7 +27,6 @@ export function UploadDocumentOrganism() {
                         boxShadow: `0 5px 15px ${theme.palette.grey[500]}`,
                     },
                 }}
-                onUpload={uploadFile}
             />
         </Container>
     )

@@ -10,25 +10,26 @@ interface State {
 }
 
 const initialState: State = {
-    data: [],
+    data: []
 }
 
 const createInvestigation = createAsyncThunk(
     'investigations/start',
-    async (args: File, thunkApi) => {
+    async (args: File[], thunkApi) => {
         const { id } = await investigationsApi.create()
 
         thunkApi.dispatch(
             investigationsSlice.actions.addInvestigation({
                 id,
-                title: args.name,
+                title: args[0].name,
                 state: 'PROCESSING',
             })
         )
 
         thunkApi.dispatch(investigationsSlice.actions.setViewId(id))
 
-        await investigationsApi.uploadDocument(id, args)
+        debugger;
+        await investigationsApi.uploadDocuments(id, args)
         await thunkApi.dispatch(fetchUntilProcessed(id))
     }
 )
