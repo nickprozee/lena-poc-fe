@@ -17,7 +17,7 @@ interface HiddenProps {
 
 export function UploadArea(props: HiddenProps) {
     return (
-        <FileUploader multiple={false} handleChange={props.onUpload} types={['PDF', 'ZIP']}>
+        <FileUploader multiple={false} handleChange={props.onUpload} types={['DOCX', 'PDF']}>
             {props.children}
         </FileUploader>
     )
