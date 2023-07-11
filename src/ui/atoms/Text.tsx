@@ -4,6 +4,7 @@ interface Props {
     size: 'content' | 'subtitle' | 'title'
     value: string
     bold?: boolean
+    color?: string
 }
 
 const SIZES = {
@@ -17,11 +18,11 @@ export function Text(props: Props) {
 
     return (
         <Typography
-            color={'primary'}
+            color={props.color ? props.color : 'primary'}
             sx={{
                 maxWidth: '100%',
-                overflow: 'hidden'
-            }}            
+                overflow: 'hidden',
+            }}
             textOverflow={'ellipsis'}
             fontWeight={props.bold ? 'bold' : 'initial'}
             //@ts-expect-error

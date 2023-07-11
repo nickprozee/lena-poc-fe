@@ -14,7 +14,10 @@ interface Props {
 
 export function UploadArea(props: Props) {
     return (
-        <FileUploader multiple={false} handleChange={props.onUpload} types={props.fileTypes}>
+        <FileUploader
+            multiple={false}
+            handleChange={props.onUpload}
+            types={props.fileTypes}>
             {props.children}
         </FileUploader>
     )
@@ -29,7 +32,7 @@ export function DocumentUploadMolecule(props: Props) {
                     sx={{ py: 3, px: 2, ...props.sx }}>
                     <AddIcon color="success" sx={{ mr: 1 }} />
                     <Text
-                        size="subtitle"                        
+                        size="subtitle"
                         value={props.message ?? 'Voeg document(en) toe'}
                     />
                 </Container>

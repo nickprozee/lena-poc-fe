@@ -15,13 +15,10 @@ export function DashboardLayout(props: Props) {
             direction="horizontal"
             sx={{
                 height: '100vh',
-                background: '#1a26b81f'
+                background: '#1a26b81f',
             }}>
             {/** SideBar */}
-            <Container
-                sx={{ width: 500 }}>
-                {props.sideBar}
-            </Container>
+            <Container sx={{ width: 500 }}>{props.sideBar}</Container>
 
             {/** Content */}
             <MuiContainer>{props.content}</MuiContainer>

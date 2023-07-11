@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { InvestigationViewModel } from '../../types/Investigations'
 import { getAsset } from '../../utils/assetHelper'
 import { Container, Text, Image } from '../atoms'
+import { theme } from '../theme'
+import { Avatar, Paper } from '@mui/material'
 
 interface Props {
     investigation: InvestigationViewModel
@@ -28,10 +30,46 @@ export function Chat(props: Props) {
             centered
             sx={{ height: '100vh' }}>
             {summary && (
-                <>
-                    <Text size="title" value={title} bold />
-                    <Text size="subtitle" value={summary} />
-                </>
+                <Container
+                    sx={{
+                        width: '100%',
+                        height: '100vh',
+                        maxHeight: '80vh',
+                        marginTop: 'auto',
+                    }}>
+                    <Container
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'flex-end',
+                        }}>
+                        <Avatar
+                            alt="politie"
+                            src={getAsset('logo_politie.svg')}
+                            sx={{
+                                right: '1rem',
+                                padding: '.3rem',
+                                img: { objectFit: 'fill' },
+                            }}
+                        />
+                        <Paper
+                            elevation={1}
+                            sx={{
+                                background: '#fff',
+                                padding: '2rem',
+                                borderRadius: '2rem 2rem 2rem 0',
+                                width: '100%',
+                            }}>
+                            <Text
+                                size="title"
+                                bold
+                                color={theme.palette.primary.main}
+                                value={title}
+                            />
+                            <Text size="content" color="#000" value={summary} />
+                        </Paper>
+                    </Container>
+                </Container>
             )}
             {!summary && (
                 <>
