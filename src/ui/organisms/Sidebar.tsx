@@ -70,7 +70,7 @@ export function SideBarOrganism() {
             </Container>
             <ListSubheader>LENA 0.1</ListSubheader>
 
-            <DocumentUploadMolecule
+            <DocumentUploadMolecule fileTypes={['DOCX', 'PDF']}
                 onUpload={(f) => f && dispatch(createInvestigation(f))}
             />
 

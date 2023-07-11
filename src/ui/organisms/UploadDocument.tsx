@@ -9,6 +9,7 @@ export function UploadDocumentOrganism() {
     return (
         <Container centered sx={{ height: '100vh' }}>
             <DocumentUploadMolecule
+            fileTypes={['DOCX', 'PDF']}
                 message="Klik hier of sleep uw documenten(en)"
                 sx={{
                     background: '#fff',
