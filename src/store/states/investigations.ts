@@ -2,6 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { InvestigationViewModel } from '../../types/Investigations'
 import { investigationsApi } from '../../api/investigations'
 import { RootState } from '..'
+import { delay } from '../../utils/delay'
 
 interface State {
     data: InvestigationViewModel[]
@@ -15,7 +16,6 @@ const initialState: State = {
 const createInvestigation = createAsyncThunk(
     'investigations/start',
     async (args: File, thunkApi) => {
-        
         const { id } = await investigationsApi.create()
 
         thunkApi.dispatch(
@@ -29,7 +29,26 @@ const createInvestigation = createAsyncThunk(
         thunkApi.dispatch(investigationsSlice.actions.setViewId(id))
 
         await investigationsApi.uploadDocument(id, args)
-        await investigationsApi.summarize(id)
+        await thunkApi.dispatch(fetchUntilProcessed(id))
+    }
+)
+
+const fetchUntilProcessed = createAsyncThunk(
+    'investigations/fetchUntilProcessed',
+    async (id: string, thunkApi) => {
+        await thunkApi.dispatch(fetchInvestigation(id))
+        
+        const state: RootState = thunkApi.getState() as RootState
+        const result = state.investigations.data.some(
+            (i) => i.id === id && i.state === 'PROCESSED'
+        )
+
+        console.log(`RESULT FOR ${id}: `, result);
+        
+        if (!result) {            
+            await delay(5000);
+            thunkApi.dispatch(fetchUntilProcessed(id));
+        }
     }
 )
 
@@ -47,10 +66,10 @@ const fetchInvestigation = createAsyncThunk(
 
         thunkApi.dispatch(
             investigationsSlice.actions.updateInvestigation({
-                id, 
+                id,
                 state: 'PROCESSED',
                 title: investigation.title,
-                summary: response.summary
+                summary: response.summary,
             })
         )
     }
@@ -71,7 +90,6 @@ export const investigationsSlice = createSlice({
             state,
             action: PayloadAction<InvestigationViewModel>
         ) => {
-            
             const index = state.data.findIndex(
                 (inv) => inv.id === action.payload.id
             )
@@ -91,7 +109,7 @@ export const investigationsSlice = createSlice({
     },
 })
 
-export { createInvestigation, fetchInvestigation }
+export { createInvestigation }
 export const { setViewId, clearViewId } = investigationsSlice.actions
 export const selectInvestigations = (state: RootState): State =>
     state.investigations

@@ -1,5 +1,5 @@
 import { CircularProgress, ListItemButton } from '@mui/material'
-import { Text } from '../atoms'
+import { Text, Image } from '../atoms'
 import CompletedIcon from '@mui/icons-material/DocumentScannerTwoTone'
 
 interface Props {
@@ -19,8 +19,8 @@ export function InvestigationListItem(props: Props) {
                 sx={{ borderRadius: 3, py: 2 }}>
                 {props.processed ? (
                     <CompletedIcon color="primary" sx={{ mr: 1 }} />
-                ) : (
-                    <CircularProgress size={'1rem'} sx={{ mr: 1 }} />
+                ) : (                
+                     <CircularProgress size={'1rem'} sx={{ mr: 1 }} />
                 )}
                 <Text size="subtitle" value={props.text ?? props.id} />
             </ListItemButton>

@@ -15,7 +15,7 @@ export function Chat(props: Props) {
             <Text size="title" value={state} />
 
             {summary && <Text size="subtitle" value={summary} />}
-            {!summary && <Image src={getAsset('document_scan.gif')} sx={{maxWidth: 200}} />}
+            {!summary && <Image src={getAsset('document_scan.gif')} sx={{maxWidth: 100, borderRadius: 60, mt: 5}} />}
         </Container>
     )
 }
