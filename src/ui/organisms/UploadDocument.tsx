@@ -2,6 +2,7 @@ import { DocumentUploadMolecule } from '../molecules'
 import { createInvestigation } from '../../store/states/investigations'
 import { useAppDispatch } from '../../store'
 import { Container } from '../atoms'
+import { theme } from '../theme'
 
 export function UploadDocumentOrganism() {
     const dispatch = useAppDispatch()
@@ -9,16 +10,20 @@ export function UploadDocumentOrganism() {
     return (
         <Container centered sx={{ height: '100vh' }}>
             <DocumentUploadMolecule
-            fileTypes={['DOCX', 'PDF']}
+                fileTypes={['DOCX', 'PDF']}
                 message="Klik hier of sleep uw documenten(en)"
                 sx={{
-                    background: '#fff',
+                    background: theme.palette.common.white,
                     borderRadius: 2,
                     width: 500,
                     height: 100,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    filter: 'drop-shadow(0px 5px 15px silver)',
+                    boxShadow: `0 5px 15px ${theme.palette.grey[400]}`,
+                    transition: '.3s',
+                    ':hover': {
+                        boxShadow: `0 5px 15px ${theme.palette.grey[500]}`,
+                    },
                 }}
                 onUpload={uploadFile}
             />

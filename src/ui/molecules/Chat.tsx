@@ -4,6 +4,7 @@ import { getAsset } from '../../utils/assetHelper'
 import { Container, Text, Image } from '../atoms'
 import { theme } from '../theme'
 import { Avatar, Paper } from '@mui/material'
+// import { ChatField } from './ChatField'
 
 interface Props {
     investigation: InvestigationViewModel
@@ -33,15 +34,17 @@ export function Chat(props: Props) {
                 <Container
                     sx={{
                         width: '100%',
-                        height: '100vh',
-                        maxHeight: '80vh',
-                        marginTop: 'auto',
+                        height: '100%',
+                        mt: '5rem',
+                        justifyContent: 'space-between',
                     }}>
                     <Container
                         sx={{
+                            padding: '0 4rem',
                             display: 'flex',
                             flexDirection: 'row',
                             alignItems: 'flex-end',
+                            maxWidth: '70rem',
                         }}>
                         <Avatar
                             alt="politie"
@@ -50,25 +53,32 @@ export function Chat(props: Props) {
                                 right: '1rem',
                                 padding: '.3rem',
                                 img: { objectFit: 'fill' },
+                                bgcolor: theme.palette.primary.main,
                             }}
                         />
                         <Paper
                             elevation={1}
                             sx={{
-                                background: '#fff',
+                                background: theme.palette.common.white,
                                 padding: '2rem',
                                 borderRadius: '2rem 2rem 2rem 0',
                                 width: '100%',
                             }}>
                             <Text
-                                size="title"
+                                size="subtitle"
                                 bold
                                 color={theme.palette.primary.main}
                                 value={title}
+                                sx={{ mb: '1rem' }}
                             />
-                            <Text size="content" color="#000" value={summary} />
+                            <Text
+                                size="content"
+                                color="common.black"
+                                value={summary}
+                            />
                         </Paper>
                     </Container>
+                    {/* <ChatField /> */}
                 </Container>
             )}
             {!summary && (

@@ -18,10 +18,12 @@ export function DashboardLayout(props: Props) {
                 background: '#1a26b81f',
             }}>
             {/** SideBar */}
-            <Container sx={{ width: 500 }}>{props.sideBar}</Container>
+            <Container sx={{ width: '30%' }}>{props.sideBar}</Container>
 
             {/** Content */}
-            <MuiContainer>{props.content}</MuiContainer>
+            <Container sx={{ px: '0rem !important', width: '70%' }}>
+                {props.content}
+            </Container>
         </Container>
     )
 }

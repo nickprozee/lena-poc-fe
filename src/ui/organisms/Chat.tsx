@@ -1,7 +1,5 @@
 import { useSelector } from 'react-redux'
-import {
-    selectInvestigations,
-} from '../../store/states/investigations'
+import { selectInvestigations } from '../../store/states/investigations'
 import { Chat } from '../molecules/Chat'
 
 export function ChatOrganism() {
@@ -9,7 +7,5 @@ export function ChatOrganism() {
     const viewId = state.viewId
     const investigation = state.data.find((i) => i.id === viewId)
 
-    if (!viewId) return <></>
-
-    return <Chat investigation={investigation!} />
+    if (viewId) return <Chat investigation={investigation!} />
 }

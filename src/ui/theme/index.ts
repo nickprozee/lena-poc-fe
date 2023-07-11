@@ -1,13 +1,15 @@
-import { createTheme } from '@mui/material'
+import { createTheme } from '@mui/material/styles'
 
 export const theme = createTheme({
     palette: {
         primary: {
             main: '#174880',
-            light: '#17488026',
+            dark: '#17488026',
+            light: '#174880cc',
         },
-        secondary: {
-            main: '#eeeeee',
+        grey: {
+            200: '#eeeeee',
+            800: '#808080', // box-shadow color
         },
     },
 })

@@ -11,6 +11,7 @@ import {
 } from '../../store/states/investigations'
 import { DocumentUploadMolecule } from '../molecules/DocumentUpload'
 import { useAppDispatch } from '../../store'
+import { theme } from '../theme'
 
 export function SideBarOrganism() {
     const investigations = useSelector(selectInvestigations)
@@ -24,10 +25,10 @@ export function SideBarOrganism() {
                 minHeight: '80vh',
                 pt: 1,
                 px: 3,
-                background: '#fff',
+                background: theme.palette.common.white,
                 transition: 'height 1s linear',
                 borderTopRightRadius: 30,
-                filter: 'drop-shadow(-5px 10px 10px gray)',
+                boxShadow: `-5px 10px 10px ${theme.palette.grey[800]}`,
                 zIndex: 10,
                 overflow: 'hidden',
             }}>
@@ -58,7 +59,6 @@ export function SideBarOrganism() {
                         src={getAsset('ai_1.gif')}
                         sx={{
                             mt: -10.5,
-                            //mt: -4,
                             mb: -3,
                             maxWidth: 90,
                             zIndex: -1,

@@ -1,10 +1,11 @@
-import { Typography } from '@mui/material'
+import { SxProps, Typography, Theme } from '@mui/material'
 
 interface Props {
     size: 'content' | 'subtitle' | 'title'
     value: string
     bold?: boolean
     color?: string
+    sx?: SxProps<Theme>
 }
 
 const SIZES = {
@@ -22,6 +23,7 @@ export function Text(props: Props) {
             sx={{
                 maxWidth: '100%',
                 overflow: 'hidden',
+                ...props.sx,
             }}
             textOverflow={'ellipsis'}
             fontWeight={props.bold ? 'bold' : 'initial'}
