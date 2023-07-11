@@ -33,7 +33,7 @@ export function SideBarOrganism() {
             }}>
             <Container direction="vertical" centered sx={{ mb: 2 }}>
                 <Image
-                    src={getAsset('logo_politie.svg')}
+                    src={getAsset('logo_politie_text.svg')}
                     sx={{
                         my: 1,
                         maxWidth: 120,
@@ -45,7 +45,7 @@ export function SideBarOrganism() {
                     <Image
                         src={getAsset('ai_2.gif')}
                         sx={{
-                            mt: -13.5,                            
+                            mt: -13.5,
                             mb: -5,
                             maxWidth: 130,
                             height: 130,
@@ -70,11 +70,12 @@ export function SideBarOrganism() {
             </Container>
             <ListSubheader>LENA 0.1</ListSubheader>
 
-            <DocumentUploadMolecule fileTypes={['DOCX', 'PDF']}
+            <DocumentUploadMolecule
+                fileTypes={['DOCX', 'PDF']}
                 onUpload={(f) => f && dispatch(createInvestigation(f))}
             />
 
-            <List sx={{ pt: 0, overflow: 'auto' }}>
+            <List sx={{ pt: 0, mt: 2, overflow: 'auto' }}>
                 <ListSubheader>Bestanden</ListSubheader>
                 {investigations.data.map(
                     (investigation: InvestigationViewModel) => (
