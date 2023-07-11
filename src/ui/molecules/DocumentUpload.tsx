@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/CloudUploadTwoTone'
 
 interface Props {
     message?: string
-    onUpload: (f: File) => any
+    onUpload: (files: File[]) => any
     sx?: SxProps<Theme>
     children?: React.ReactNode
     fileTypes?: string[]
@@ -14,7 +14,7 @@ interface Props {
 
 export function UploadArea(props: Props) {
     return (
-        <FileUploader multiple={false} handleChange={props.onUpload} types={props.fileTypes}>
+        <FileUploader multiple={true} handleChange={props.onUpload} types={props.fileTypes}>
             {props.children}
         </FileUploader>
     )

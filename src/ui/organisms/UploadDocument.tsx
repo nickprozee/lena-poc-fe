@@ -5,12 +5,14 @@ import { Container } from '../atoms'
 
 export function UploadDocumentOrganism() {
     const dispatch = useAppDispatch()
-    const uploadFile = (f: File) => dispatch(createInvestigation(f))
+    const uploadFiles = (files: File[]) => dispatch(createInvestigation(files))
+
     return (
         <Container centered sx={{ height: '100vh' }}>
             <DocumentUploadMolecule
             fileTypes={['DOCX', 'PDF']}
                 message="Klik hier of sleep uw documenten(en)"
+                onUpload={uploadFiles}
                 sx={{
                     background: '#fff',
                     borderRadius: 2,
@@ -20,7 +22,6 @@ export function UploadDocumentOrganism() {
                     alignItems: 'center',
                     filter: 'drop-shadow(0px 5px 15px silver)',
                 }}
-                onUpload={uploadFile}
             />
         </Container>
     )
