@@ -1,5 +1,31 @@
 {
-  "investigations": [ ],
+  "investigations": [
+    {
+      "id": 5004,
+      "status": "CREATED"
+    },
+    {
+      "id": 5005,
+      "status": "CREATED"
+    },
+    {
+      "id": 5006,
+      "status": "CREATED"
+    }
+  ],
   "upload": {},
-  "summarize": [ ]
+  "summarize": [
+    {
+      "id": 5004,
+      "summary": "Hello World! 5004"
+    },
+    {
+      "id": 5005,
+      "summary": "Hello World! 5005"
+    },
+    {
+      "id": 5006,
+      "summary": "Hello World! 5006"
+    }
+  ]
 }
