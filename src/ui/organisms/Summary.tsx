@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux'
 import { selectInvestigations } from '../../store/states/investigations'
 import { Summary, SummaryLoader } from '../molecules/Summary'
 import { Container } from '@mui/material'
-import { ChatInputMolecule } from '../molecules'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 import { InvestigationViewModel } from '../../types/Investigations'
@@ -26,35 +25,28 @@ export function SummaryOrganism() {
         )
 
         return () => clearTimeout(timeout);
-    }, [timeMsg])
+    }, [timeMsg, viewId])
 
     if (!investigation) return
 
     const title = investigation.title ?? 'Samenvatten...'
-    const summary = investigation.summary
-    const createdAt =
-        moment(investigation.summary?.createdAt).fromNow() ?? 'Vewerken...'
+    const summary = investigation.summary;
 
     return (
         <Container
             sx={{
                 flexDirection: 'column',
-                display: 'flex',
-                justifyContent: 'space-between',
-                minHeight: '80vh',
-                mt: 'auto',
+                mt: 2,
             }}>
             {summary ? (
                 <Summary
                     title={title}
                     summary={summary.summary}
-                    createdAt={createdAt}
+                    createdAt={timeMsg}
                 />
             ) : (
                 <SummaryLoader title={title} />
             )}
-
-            <ChatInputMolecule />
         </Container>
     )
 }

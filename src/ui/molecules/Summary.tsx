@@ -4,18 +4,21 @@ import { ReactNode } from 'react'
 function SummaryCard(props: {
     children: ReactNode
     title: string
-    createdAt?: string
+    createdAt: string
 }) {
+    const { createdAt } = props
+    const capitalized = createdAt.charAt(0).toUpperCase()
+    const timeMsg = `${capitalized}${createdAt.slice(1)}`
+
     return (
         <Card sx={{ p: 5 }} elevation={0}>
-            <Typography gutterBottom variant="h4" component="div">
+            <Typography gutterBottom variant="h4" component="div" color='primary'>
                 {props.title}
             </Typography>
-            {props.createdAt && (
-                <Typography gutterBottom variant="caption">
-                    {props.createdAt}
-                </Typography>
-            )}
+
+            <Typography gutterBottom variant="caption" color='gray'>
+                {timeMsg}
+            </Typography>
             <CardContent>{props.children}</CardContent>
         </Card>
     )
@@ -59,7 +62,7 @@ export function Summary(props: {
 
 export function SummaryLoader(props: { title: string }) {
     return (
-        <SummaryCard title={props.title}>
+        <SummaryCard title={props.title} createdAt='Verwerken'>
             <SkeletonSection rows={3} width={'75%'} />
             <br />
             <SkeletonSection rows={4} />
