@@ -4,7 +4,6 @@ import { Summary, SummaryLoader } from '../molecules/Summary'
 import { Container } from '@mui/material'
 import { ChatInputMolecule } from '../molecules'
 import moment from 'moment'
-moment.locale('nl-NL')
 
 export function SummaryOrganism() {
     const state = useSelector(selectInvestigations)
@@ -16,7 +15,7 @@ export function SummaryOrganism() {
     const title = investigation.title ?? 'Samenvatten...'
     const summary = investigation.summary
     const createdAt =
-        moment(investigation.summary?.createdAt).local().fromNow() ??
+        moment(investigation.summary?.createdAt).fromNow() ??
         'Vewerken...'
 
     return (
