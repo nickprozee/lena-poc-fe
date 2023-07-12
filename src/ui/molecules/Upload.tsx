@@ -15,12 +15,21 @@ interface Props {
 
 export function UploadArea(props: Props) {
     return (
-        <FileUploader
-            multiple={true}
-            handleChange={props.onUpload}
-            types={props.fileTypes}>
-            {props.children}
-        </FileUploader>
+        <Container
+            sx={{
+                label: {
+                    ':focus-within': {
+                        outline: 'none',
+                    },
+                },
+            }}>
+            <FileUploader
+                multiple={true}
+                handleChange={props.onUpload}
+                types={props.fileTypes}>
+                {props.children}
+            </FileUploader>
+        </Container>
     )
 }
 
