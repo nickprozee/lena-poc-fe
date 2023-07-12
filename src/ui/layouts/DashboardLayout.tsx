@@ -1,5 +1,4 @@
 import { Container } from '../atoms/Container'
-import { Container as MuiContainer } from '@mui/material'
 
 interface Props {
     sideBar: React.ReactNode
@@ -18,10 +17,10 @@ export function DashboardLayout(props: Props) {
                 background: '#1a26b81f',
             }}>
             {/** SideBar */}
-            <Container sx={{ width: '30%' }}>{props.sideBar}</Container>
+            <Container sx={{ width: 400 }}>{props.sideBar}</Container>
 
             {/** Content */}
-            <Container sx={{ px: '0rem !important', width: '70%' }}>
+            <Container sx={{ px: '0rem !important', flex: 1 }}>
                 {props.content}
             </Container>
         </Container>

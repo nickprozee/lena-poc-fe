@@ -6,7 +6,7 @@ export const theme = createTheme({
             main: '#174880',
             dark: '#17488026',
             light: '#174880cc',
-        },
+        },        
         grey: {
             200: '#eeeeee',
             800: '#808080', // box-shadow color

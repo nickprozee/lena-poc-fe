@@ -2,15 +2,15 @@ import { Divider, IconButton, InputBase, Paper } from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import { Container } from '../atoms'
 
-export function ChatField() {
+export function ChatInputMolecule() {
     return (
-        <Container sx={{ bgcolor: 'rgba(23, 72, 128, 0.08)', padding: '3rem' }}>
+        <Container sx={{ bgcolor: 'rgba(23, 72, 128, 0.08)', width:'100%' }}>
             <Paper
                 sx={{
                     p: '.5rem .75rem',
                     display: 'flex',
                     alignItems: 'center',
-
+                    m: 2,
                     borderRadius: 4,
                 }}>
                 <InputBase
