@@ -29,7 +29,7 @@ class Api extends BaseClient {
 
     create = async (): Promise<Investigation> => {
         const { json } = await this.api<Investigation>(
-            'create',
+            '',
             undefined,
             'POST'
         )
