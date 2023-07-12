@@ -1,5 +1,6 @@
 import { Card, CardContent, Skeleton, Typography } from '@mui/material'
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
+import { TypeAnimation } from 'react-type-animation'
 
 function SummaryCard(props: {
     children: ReactNode
@@ -12,11 +13,15 @@ function SummaryCard(props: {
 
     return (
         <Card sx={{ p: 5 }} elevation={0}>
-            <Typography gutterBottom variant="h4" component="div" color='primary'>
+            <Typography
+                gutterBottom
+                variant="h4"
+                component="div"
+                color="primary">
                 {props.title}
             </Typography>
 
-            <Typography gutterBottom variant="caption" color='gray'>
+            <Typography gutterBottom variant="caption" color="gray">
                 {timeMsg}
             </Typography>
             <CardContent>{props.children}</CardContent>
@@ -39,30 +44,80 @@ function SkeletonSection(props: { rows: number; width?: number | string }) {
     )
 }
 
+function mergeSections(originalArray: string[]): string[] {
+    const newArray: string[] = []
+    let previousItem = ''
+
+    for (const item of originalArray) {
+        previousItem += item
+        newArray.push(previousItem)
+    }
+
+    return newArray
+}
+
+export function TypeWriter(props: { sections: string[] }) {
+    const [showSections, setShowSections] = useState(0)
+
+    // useEffect(() => {
+    //     setTimeout(() => setShowSections(showSections + 1), 2000);
+    // }, [showSections])
+
+    return (
+        <>
+            {props.sections
+                .filter((_, index) => index <= showSections)
+                .map((item, index) => (
+                    <>
+                        <TypeAnimation
+                            onEnded={() => alert('FINISHED')}
+                            sequence={[item]}
+                            speed={99}
+                            style={{
+                                fontFamily:
+                                    'Roboto, Helvetica, Arial, sans-serif',
+                                fontSize: 14,
+                                fontWeight: 400,
+                                color: 'rgba(0,0,0,.6)',
+                            }}
+                            repeat={0}
+                        />
+                        <br /><br />
+                    </>
+                ))}
+        </>
+    )
+}
+
 export function Summary(props: {
     title: string
     summary: string
     createdAt: string
 }) {
     const sections = props.summary.split('\r')
+    const sequence = mergeSections(sections)
 
     return (
         <SummaryCard title={props.title} createdAt={props.createdAt}>
-            {sections.map((section, i) => (
-                <Typography
-                    sx={{ pt: i === 0 ? 0 : 2 }}
-                    variant="body2"
-                    color="text.secondary">
-                    {section}
-                </Typography>
-            ))}
+            <TypeAnimation
+                sequence={sequence.flatMap((s) => [s, 2000])}
+                speed={99}
+                style={{
+                    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+                    fontSize: 14,
+                    fontWeight: 400,
+                    color: 'rgba(0,0,0,.6)',
+                    whiteSpace: 'pre-line'
+                }}
+                repeat={0}
+            />
         </SummaryCard>
     )
 }
 
 export function SummaryLoader(props: { title: string }) {
     return (
-        <SummaryCard title={props.title} createdAt='Verwerken'>
+        <SummaryCard title={props.title} createdAt="Verwerken">
             <SkeletonSection rows={3} width={'75%'} />
             <br />
             <SkeletonSection rows={4} />
