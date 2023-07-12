@@ -22,8 +22,7 @@ export function ChatInputMolecule() {
                     }}>
                     <InputBase
                         sx={{ ml: 1, flex: 1 }}
-                        placeholder="Stel hier de vragen"
-                        inputProps={{ 'aria-label': 'stel hier de vragen' }}
+                        placeholder="Wat wilt u met de samenvatting doen?"
                         onClick={() => ({})}
                     />
                     <Divider
