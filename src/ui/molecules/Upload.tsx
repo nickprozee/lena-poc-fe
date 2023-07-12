@@ -24,7 +24,7 @@ export function UploadArea(props: Props) {
     )
 }
 
-export function DocumentUploadMolecule(props: Props) {
+export function UploadMolecule(props: Props) {
     return (
         <UploadArea {...props}>
             <ListItemButton

@@ -1,8 +1,9 @@
-import { DocumentUploadMolecule } from '../molecules'
+
 import { createInvestigation } from '../../store/states/investigations'
 import { useAppDispatch } from '../../store'
 import { Container } from '../atoms'
 import { theme } from '../theme'
+import { UploadMolecule } from '../molecules'
 
 export function UploadDocumentOrganism() {
     const dispatch = useAppDispatch()
@@ -10,7 +11,7 @@ export function UploadDocumentOrganism() {
 
     return (
         <Container centered sx={{ height: '100vh' }}>
-            <DocumentUploadMolecule
+            <UploadMolecule
                 fileTypes={['DOCX', 'PDF']}
                 message="Klik hier of sleep uw documenten(en)"
                 onUpload={uploadFiles}

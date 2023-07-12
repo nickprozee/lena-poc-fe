@@ -69,7 +69,7 @@ const fetchInvestigation = createAsyncThunk(
                 id,
                 state: 'PROCESSED',
                 title: investigation.title,
-                summary: response.summary,
+                summary: response,
             })
         )
     }

@@ -1,3 +1,3 @@
-export { DocumentUploadMolecule } from './DocumentUpload'
+export { UploadMolecule } from './Upload'
 export { InvestigationListItem } from './InvestigationListItem'
-export { ChatInputMolecule as ChatFieldMolecule } from './ChatField'
+export { ChatInputMolecule } from './ChatField'

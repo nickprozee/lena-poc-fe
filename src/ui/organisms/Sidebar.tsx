@@ -9,7 +9,7 @@ import {
     selectInvestigations,
     setViewId,
 } from '../../store/states/investigations'
-import { DocumentUploadMolecule } from '../molecules/DocumentUpload'
+import { UploadMolecule } from '../molecules/Upload'
 import { useAppDispatch } from '../../store'
 import { theme } from '../theme'
 
@@ -23,11 +23,10 @@ export function SideBarOrganism() {
             sx={{
                 mt: 'auto',
                 minHeight: '80vh',
-                pt: 1,
                 px: 3,
                 background: theme.palette.common.white,
                 transition: 'height 1s linear',
-                borderTopRightRadius: 30,
+                borderTopRightRadius: 4,
                 boxShadow: `-5px 10px 10px ${theme.palette.grey[800]}`,
                 zIndex: 10,
                 overflow: 'hidden',
@@ -70,7 +69,7 @@ export function SideBarOrganism() {
             </Container>
             <ListSubheader>LENA 0.1</ListSubheader>
 
-            <DocumentUploadMolecule
+            <UploadMolecule
                 fileTypes={['DOCX', 'PDF']}
                 onUpload={(f) => f && dispatch(createInvestigation(f))}
             />

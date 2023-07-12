@@ -45,6 +45,7 @@ module.exports = function (req, res, next) {
                 body: JSON.stringify({
                     id: parseInt(request_id),
                     summary: `${mockMessage}\r\n${mockMessage}\r\n${mockMessage}`,
+                    createdAt: new Date(Date.now()).toJSON()
                 }),
             })
 

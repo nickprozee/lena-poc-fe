@@ -4,7 +4,7 @@ import { Container } from '../atoms'
 
 export function ChatInputMolecule() {
     return (
-        <Container sx={{ bgcolor: 'rgba(23, 72, 128, 0.08)', width:'100%' }}>
+        <Container sx={{ bgcolor: 'rgba(23, 72, 128, 0.08)', width:'100%', borderTopRightRadius: 4, borderTopLeftRadius: 4  }}>
             <Paper
                 sx={{
                     p: '.5rem .75rem',
