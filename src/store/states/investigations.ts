@@ -10,7 +10,7 @@ interface State {
 }
 
 const initialState: State = {
-    data: []
+    data: [],
 }
 
 const createInvestigation = createAsyncThunk(
@@ -28,7 +28,6 @@ const createInvestigation = createAsyncThunk(
 
         thunkApi.dispatch(investigationsSlice.actions.setViewId(id))
 
-        debugger;
         await investigationsApi.uploadDocuments(id, args)
         await thunkApi.dispatch(fetchUntilProcessed(id))
     }
@@ -38,17 +37,17 @@ const fetchUntilProcessed = createAsyncThunk(
     'investigations/fetchUntilProcessed',
     async (id: string, thunkApi) => {
         await thunkApi.dispatch(fetchInvestigation(id))
-        
+
         const state: RootState = thunkApi.getState() as RootState
         const result = state.investigations.data.some(
             (i) => i.id === id && i.state === 'PROCESSED'
         )
 
-        console.log(`RESULT FOR ${id}: `, result);
-        
-        if (!result) {            
-            await delay(5000);
-            thunkApi.dispatch(fetchUntilProcessed(id));
+        console.log(`RESULT FOR ${id}: `, result)
+
+        if (!result) {
+            await delay(5000)
+            thunkApi.dispatch(fetchUntilProcessed(id))
         }
     }
 )
