@@ -4,19 +4,36 @@ import { Summary, SummaryLoader } from '../molecules/Summary'
 import { Container } from '@mui/material'
 import { ChatInputMolecule } from '../molecules'
 import moment from 'moment'
+import { useEffect, useState } from 'react'
+import { InvestigationViewModel } from '../../types/Investigations'
+
+let timeout: any
+const createTimeMessage = (investigation?: InvestigationViewModel) =>
+    investigation
+        ? moment(investigation.summary?.createdAt).fromNow()
+        : 'Vewerken...'
 
 export function SummaryOrganism() {
-    const state = useSelector(selectInvestigations)
-    const viewId = state.viewId
-    const investigation = state.data.find((i) => i.id === viewId)
+    const { viewId, data } = useSelector(selectInvestigations)
+    const findInvestigation = () => data.find((i) => i.id === viewId)
+    const investigation = findInvestigation()
+    const [timeMsg, setTimeMsg] = useState(createTimeMessage(investigation))
+
+    useEffect(() => {
+        timeout = setTimeout(() =>
+            setTimeMsg(createTimeMessage(findInvestigation())),
+            1000
+        )
+
+        return () => clearTimeout(timeout);
+    }, [timeMsg])
 
     if (!investigation) return
 
     const title = investigation.title ?? 'Samenvatten...'
     const summary = investigation.summary
     const createdAt =
-        moment(investigation.summary?.createdAt).fromNow() ??
-        'Vewerken...'
+        moment(investigation.summary?.createdAt).fromNow() ?? 'Vewerken...'
 
     return (
         <Container
