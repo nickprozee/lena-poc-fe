@@ -21,7 +21,6 @@ export function SideBarOrganism() {
         <Container
             direction="vertical"
             sx={{
-                mt: 'auto',
                 minHeight: '100vh',
                 px: 3,
                 background: theme.palette.common.white,
@@ -31,7 +30,7 @@ export function SideBarOrganism() {
                 zIndex: 10,
                 overflow: 'hidden',
             }}>
-            <Container direction="vertical" centered sx={{ mb: 2 }}>
+            <Container direction="vertical" centered sx={{ mb: 2, mt: 2 }}>
                 <Image
                     src={getAsset('logo_politie_text.svg')}
                     sx={{
