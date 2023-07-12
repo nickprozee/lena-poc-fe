@@ -34,20 +34,7 @@ export function SideBarOrganism() {
                     src={getAsset('logo_politie_text.svg')}
                     sx={{
                         my: 1,
-                        maxWidth: 120,
-                        filter: 'drop-shadow(5px 5px 10px #4444dd)',
-                    }}
-                />
-
-                <Image
-                    src={getAsset('ai_2.gif')}
-                    sx={{
-                        mt: -13.5,
-                        mb: -5,
-                        maxWidth: 130,
-                        height: 130,
-                        zIndex: -1,
-                        opacity: 0.5,
+                        maxWidth: 120
                     }}
                 />
             </Container>
