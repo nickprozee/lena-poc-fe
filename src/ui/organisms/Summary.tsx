@@ -14,9 +14,9 @@ export function SummaryOrganism() {
 
     const title = investigation.title ?? 'Samenvatten...'
     const summary = investigation.summary
-    const createdAt =
-        moment(investigation.summary?.createdAt).fromNow() ??
-        'Vewerken...'
+    const dateNow = moment(investigation.summary?.createdAt).fromNow()
+    const capitalized = dateNow.charAt(0).toUpperCase()
+    const createdAt = `${capitalized}${dateNow.slice(1)}` ?? 'Vewerken...'
 
     return (
         <Container
