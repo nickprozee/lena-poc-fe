@@ -16,7 +16,7 @@ export function InvestigationListItem(props: Props) {
             selected={props.selected}
             onClick={props.onClick}
             sx={{
-                borderRadius: 3,
+                borderRadius: 1,
                 py: 2,
                 my: 1,
             }}>

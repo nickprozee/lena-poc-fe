@@ -39,7 +39,7 @@ export function UploadMolecule(props: Props) {
             <ListItemButton
                 sx={{
                     p: 0,
-                    borderRadius: theme.shape.borderRadius,
+                    borderRadius: 1,
                     background: theme.palette.grey[200],
                 }}>
                 <Container

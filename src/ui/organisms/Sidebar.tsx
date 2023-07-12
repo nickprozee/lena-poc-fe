@@ -21,17 +21,16 @@ export function SideBarOrganism() {
         <Container
             direction="vertical"
             sx={{
-                mt: 'auto',
-                minHeight: '80vh',
+                minHeight: '100vh',
                 px: 3,
                 background: theme.palette.common.white,
                 transition: 'height 1s linear',
                 borderTopRightRadius: 4,
-                boxShadow: `-5px 10px 10px ${theme.palette.grey[800]}`,
+               // boxShadow: `-5px 10px 10px ${theme.palette.grey[800]}`,
                 zIndex: 10,
                 overflow: 'hidden',
             }}>
-            <Container direction="vertical" centered sx={{ mb: 2 }}>
+            <Container direction="vertical" centered sx={{ mb: 2, mt: 2 }}>
                 <Image
                     src={getAsset('logo_politie_text.svg')}
                     sx={{
