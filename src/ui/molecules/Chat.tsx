@@ -3,12 +3,12 @@ import { InvestigationViewModel } from '../../types/Investigations'
 import { getAsset } from '../../utils/assetHelper'
 import { Container, Text, Image } from '../atoms'
 import { theme } from '../theme'
-import { Avatar, Paper } from '@mui/material'
+import { Card, CardContent, Typography } from '@mui/material'
 import { ChatFieldMolecule } from '.'
 
 interface Props {
     investigation: InvestigationViewModel
-    // onSendMessage?: (msg:string) => any;    
+    // onSendMessage?: (msg:string) => any;
 }
 
 let index = 0
@@ -24,45 +24,16 @@ export function DocumentSummary(props: {
     createdAt: string
 }) {
     return (
-        <Container
-            sx={{
-                padding: '0 4rem',
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'flex-end',
-            }}>
-            <Avatar
-                alt="politie"
-                src={getAsset('logo_politie.svg')}
-                sx={{
-                    right: '1rem',
-                    padding: '.3rem',
-                    img: { objectFit: 'fill' },
-                    bgcolor: theme.palette.primary.main,
-                }}
-            />
-            <Paper
-                elevation={1}
-                sx={{
-                    background: theme.palette.common.white,
-                    padding: '2rem',
-                    borderRadius: '2rem 2rem 2rem 0',
-                    width: '100%',
-                }}>
-                <Text
-                    size="subtitle"
-                    bold
-                    color={theme.palette.primary.main}
-                    value={props.title}
-                    sx={{ mb: '1rem' }}
-                />
-                <Text
-                    size="content"
-                    color="common.black"
-                    value={props.summary}
-                />
-            </Paper>
-        </Container>
+        <Card>
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                    {props.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    {props.summary}
+                </Typography>
+            </CardContent>
+        </Card>
     )
 }
 
