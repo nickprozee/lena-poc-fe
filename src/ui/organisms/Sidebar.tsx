@@ -34,7 +34,7 @@ export function SideBarOrganism() {
                     src={getAsset('logo_politie_text.svg')}
                     sx={{
                         my: 1,
-                        maxWidth: 120
+                        maxWidth: 120,
                     }}
                 />
             </Container>
@@ -46,7 +46,7 @@ export function SideBarOrganism() {
             />
 
             <List sx={{ pt: 0, mt: 2, overflow: 'auto' }}>
-                <ListSubheader>Bestanden</ListSubheader>
+                <ListSubheader>Samenvattingen</ListSubheader>
                 {investigations.data.map(
                     (investigation: InvestigationViewModel) => (
                         <InvestigationListItem

@@ -1,4 +1,3 @@
-
 import { createInvestigation } from '../../store/states/investigations'
 import { useAppDispatch } from '../../store'
 import { Container } from '../atoms'
@@ -13,12 +12,12 @@ export function UploadDocumentOrganism() {
         <Container centered sx={{ height: '100vh' }}>
             <UploadMolecule
                 fileTypes={['DOCX', 'PDF']}
-                message="Klik hier of sleep uw documenten(en)"
+                message="Klik hier of sleep uw documenten(en) om een samenvatting te maken"
                 onUpload={uploadFiles}
                 sx={{
                     background: theme.palette.common.white,
                     borderRadius: 2,
-                    width: 500,
+                    width: 600,
                     height: 100,
                     justifyContent: 'center',
                     alignItems: 'center',

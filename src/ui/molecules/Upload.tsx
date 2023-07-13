@@ -45,7 +45,7 @@ export function UploadMolecule(props: Props) {
                 <Container
                     direction="horizontal"
                     sx={{ py: 3, px: 2, ...props.sx }}>
-                    <AddIcon color="success" sx={{ mr: 1 }} />
+                    <AddIcon color="success" sx={{ px: 2 }} />
                     <Text
                         size="subtitle"
                         value={props.message ?? 'Voeg document(en) toe'}
