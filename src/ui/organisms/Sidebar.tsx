@@ -5,8 +5,9 @@ import { InvestigationListItem } from '../molecules'
 import { List, ListSubheader } from '@mui/material'
 import { InvestigationViewModel } from '../../types/Investigations'
 import {
-    createInvestigation,
+    clearViewId,
     selectInvestigations,
+    setFiles,
     setViewId,
 } from '../../store/states/investigations'
 import { UploadMolecule } from '../molecules/Upload'
@@ -16,6 +17,13 @@ import { theme } from '../theme'
 export function SideBarOrganism() {
     const investigations = useSelector(selectInvestigations)
     const dispatch = useAppDispatch()
+
+    const handleSetFiles = (files: File[]) => {
+        if (files.length) {
+            dispatch(setFiles(files))
+            dispatch(clearViewId())
+        }
+    }
 
     return (
         <Container
@@ -42,7 +50,7 @@ export function SideBarOrganism() {
 
             <UploadMolecule
                 fileTypes={['DOCX', 'PDF']}
-                onUpload={(f) => f && dispatch(createInvestigation(f))}
+                onUpload={(files) => handleSetFiles(files)}
             />
 
             <List sx={{ pt: 0, mt: 2, overflow: 'auto' }}>

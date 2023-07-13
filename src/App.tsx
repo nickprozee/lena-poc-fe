@@ -8,6 +8,7 @@ import moment from 'moment'
 import 'moment/dist/locale/nl'
 moment().locale('nl')
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default function () {
     return (
         <Provider store={store}>

@@ -4,9 +4,9 @@ export const theme = createTheme({
     palette: {
         primary: {
             main: '#174880',
-            dark: '#17488026',
+            dark: '#0f3866',
             light: '#174880cc',
-        },        
+        },
         grey: {
             200: '#eeeeee',
             800: '#808080', // box-shadow color

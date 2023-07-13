@@ -82,7 +82,8 @@ export function TypeWriter(props: { sections: string[] }) {
                             }}
                             repeat={0}
                         />
-                        <br /><br />
+                        <br />
+                        <br />
                     </>
                 ))}
         </>
@@ -107,7 +108,7 @@ export function Summary(props: {
                     fontSize: 14,
                     fontWeight: 400,
                     color: 'rgba(0,0,0,.6)',
-                    whiteSpace: 'pre-line'
+                    whiteSpace: 'pre-line',
                 }}
                 repeat={0}
             />

@@ -7,26 +7,34 @@ import { delay } from '../../utils/delay'
 interface State {
     data: InvestigationViewModel[]
     viewId?: string
+    files: File[]
 }
 
 const initialState: State = {
     data: [],
+    files: [],
+}
+
+interface CreateInvestigationProps {
+    args: File[]
+    name: string
 }
 
 const createInvestigation = createAsyncThunk(
     'investigations/start',
-    async (args: File[], thunkApi) => {
+    async ({ args, name }: CreateInvestigationProps, thunkApi) => {
         const { id } = await investigationsApi.create()
 
         thunkApi.dispatch(
             investigationsSlice.actions.addInvestigation({
                 id,
-                title: args[0].name,
+                title: name || args[0].name,
                 state: 'PROCESSING',
             })
         )
 
         thunkApi.dispatch(investigationsSlice.actions.setViewId(id))
+        thunkApi.dispatch(investigationsSlice.actions.clearFiles())
 
         await investigationsApi.uploadDocuments(id, args)
         await thunkApi.dispatch(fetchUntilProcessed(id))
@@ -60,7 +68,7 @@ const fetchInvestigation = createAsyncThunk(
 
         //@ts-expect-error
         const state: State = thunkApi.getState().investigations
-        let investigation = state.data.find((i) => i.id === id)
+        const investigation = state.data.find((i) => i.id === id)
 
         if (!investigation) return
 
@@ -106,11 +114,25 @@ export const investigationsSlice = createSlice({
         setViewId: (state, action: PayloadAction<string>) => {
             state.viewId = action.payload
         },
+
+        setFiles: (state, action: PayloadAction<File[]>) => {
+            state.files = action.payload
+        },
+        deleteFile: (state, action: PayloadAction<number>) => {
+            const index = action.payload
+            const filesArray = Array.from(state.files)
+            filesArray.splice(index, 1)
+            state.files = filesArray
+        },
+        clearFiles: (state) => {
+            state.files = []
+        },
     },
 })
 
 export { createInvestigation }
-export const { setViewId, clearViewId } = investigationsSlice.actions
+export const { setViewId, clearViewId, setFiles, deleteFile, clearFiles } =
+    investigationsSlice.actions
 export const selectInvestigations = (state: RootState): State =>
     state.investigations
 export default investigationsSlice.reducer

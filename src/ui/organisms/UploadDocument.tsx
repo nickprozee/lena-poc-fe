@@ -1,4 +1,4 @@
-import { createInvestigation } from '../../store/states/investigations'
+import { setFiles } from '../../store/states/investigations'
 import { useAppDispatch } from '../../store'
 import { Container } from '../atoms'
 import { theme } from '../theme'
@@ -6,7 +6,7 @@ import { UploadMolecule } from '../molecules'
 
 export function UploadDocumentOrganism() {
     const dispatch = useAppDispatch()
-    const uploadFiles = (files: File[]) => dispatch(createInvestigation(files))
+    const uploadFiles = (files: File[]) => dispatch(setFiles(files))
 
     return (
         <Container centered sx={{ height: '100vh' }}>
