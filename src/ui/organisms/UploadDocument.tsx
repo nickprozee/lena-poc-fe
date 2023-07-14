@@ -12,7 +12,7 @@ export function UploadDocumentOrganism() {
         <Container centered sx={{ height: '100vh' }}>
             <UploadMolecule
                 fileTypes={['DOCX', 'PDF']}
-                message="Klik hier of sleep uw documenten(en) om een samenvatting te maken"
+                message="Voeg hier uw document(en) toe om een samenvatting te maken"
                 onUpload={uploadFiles}
                 sx={{
                     background: theme.palette.common.white,

@@ -21,7 +21,7 @@ import {
 } from '@mui/material'
 import { useAppDispatch } from '../../store'
 import React from 'react'
-import { Container, Text } from '../atoms'
+import { Container } from '../atoms'
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh'
 import DeleteIcon from '@mui/icons-material/Delete'
 import CompletedIcon from '@mui/icons-material/DocumentScannerTwoTone'
@@ -45,8 +45,9 @@ function FileCard(props: {
                 m: 2,
                 width: 'calc(100% / 2 - 3rem)',
                 border: `2px solid ${
-                    checked ? theme.palette.primary.dark : 'transparent'
+                    checked ? theme.palette.primary.light : 'transparent'
                 }`,
+                backgroundColor: checked ? theme.palette.grey[100] : undefined,
                 transition: '.2s',
                 boxShadow: 'none',
             }}>
@@ -179,13 +180,14 @@ export function FileSelectionOrganism() {
 
             <Container sx={{ mt: 5 }}>
                 <Typography variant="body1" pb={1}>
-                    Geef een naam voor de samenvatting
+                    Geef een naam voor de samenvatting (optioneel)
                 </Typography>
                 <TextField
-                    label="Naam"
-                    sx={{ width: '25rem' }}
+                    label={files[0].name || ''}
                     value={summaryName}
+                    variant="filled"
                     onChange={(e) => setSummaryName(e.target.value)}
+                    sx={{ backgroundColor: 'white' }}
                 />
 
                 <Button
@@ -200,6 +202,15 @@ export function FileSelectionOrganism() {
                         textTransform: 'none',
                         fontSize: '1rem',
                         boxShadow: 'none',
+                        backgroundColor: selectedFiles.length
+                            ? theme.palette.primary.main
+                            : undefined,
+                        color: selectedFiles.length
+                            ? theme.palette.common.white
+                            : undefined,
+                        ':hover': {
+                            backgroundColor: theme.palette.primary.dark,
+                        },
                     }}>
                     Start samenvatten
                 </Button>

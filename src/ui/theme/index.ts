@@ -5,9 +5,10 @@ export const theme = createTheme({
         primary: {
             main: '#174880',
             dark: '#0f3866',
-            light: '#174880cc',
+            light: '#1748804d',
         },
         grey: {
+            100: '#ffffff80',
             200: '#eeeeee',
             800: '#808080', // box-shadow color
         },
