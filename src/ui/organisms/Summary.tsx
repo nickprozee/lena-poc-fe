@@ -23,9 +23,12 @@ export function SummaryOrganism() {
             setTimeMsg(createTimeMessage(findInvestigation())),
             1000
         )
-
         return () => clearTimeout(timeout);
-    }, [timeMsg, viewId])
+    }, [timeMsg])
+
+    useEffect(() => {
+        setTimeMsg(createTimeMessage(findInvestigation()));
+    }, [viewId])
 
     if (!investigation) return
 
