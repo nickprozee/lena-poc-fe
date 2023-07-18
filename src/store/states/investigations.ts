@@ -6,7 +6,6 @@ import { delay } from '../../utils/delay'
 
 interface State {
     data: InvestigationViewModel[]
-    viewId?: string
     files: File[]
 }
 
@@ -25,9 +24,13 @@ const createInvestigation = createAsyncThunk(
         thunkApi
     ) => {
         debugger
-        const result = await investigationsApi.create()
         const { files, name } = args
-        const { identifier: id } = result
+        const result = await investigationsApi.create()
+
+        debugger
+        const { id } = result
+
+        await investigationsApi.updateTitle(result.id, name)
 
         thunkApi.dispatch(
             investigationsSlice.actions.addInvestigation({
@@ -37,8 +40,11 @@ const createInvestigation = createAsyncThunk(
             })
         )
 
+        window.location.pathname = "/onderzoek/" + id;
+
         await investigationsApi.summarize(id, files)
         await thunkApi.dispatch(fetchUntilProcessed(id))
+
     }
 )
 
@@ -49,7 +55,7 @@ const fetchUntilProcessed = createAsyncThunk(
 
         const state: RootState = thunkApi.getState() as RootState
         const result = state.investigations.data.some(
-            (i) => i.identifier === id && i.state === 'PROCESSED'
+            (i) => i.id === id && i.state === 'PROCESSED'
         )
 
         console.log(`RESULT FOR ${id}: `, result)
@@ -69,7 +75,7 @@ const fetchInvestigation = createAsyncThunk(
 
         //@ts-expect-error
         const state: State = thunkApi.getState().investigations
-        const investigation = state.data.find((i) => i.identifier === id)
+        const investigation = state.data.find((i) => i.id === id)
 
         if (!investigation) return
 
@@ -86,16 +92,20 @@ const fetchInvestigation = createAsyncThunk(
 
 const fetchInvestigations = createAsyncThunk(
     'investigations/list',
-    async () => {
+    async (_, thunkApi) => {
         const response = await investigationsApi.list()
-        return response.map(
+        const items = response.map(
             (i) =>
                 ({
                     ...i,
                     state: 'PROCESSING',
-                    title: 'UKNOWN TITLE',
                 } as InvestigationViewModel)
         )
+
+        for (const item of items)
+            thunkApi.dispatch(fetchUntilProcessed(item.id))
+
+        return items
     }
 )
 
@@ -120,13 +130,13 @@ export const investigationsSlice = createSlice({
             action: PayloadAction<InvestigationViewModel>
         ) => {
             const index = state.data.findIndex(
-                (inv) => inv.identifier === action.payload.identifier
+                (inv) => inv.id === action.payload.id
             )
 
             if (index === -1) return
 
             state.data[index] = action.payload
-        }       
+        },
     },
 })
 

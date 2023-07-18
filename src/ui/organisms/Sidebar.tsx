@@ -5,14 +5,28 @@ import { Image, Container } from '../atoms'
 import { InvestigationListItem, NewInvestigationListItem } from '../molecules'
 import { List, ListSubheader } from '@mui/material'
 import { InvestigationViewModel } from '../../types/Investigations'
-import {
-    selectInvestigations
-} from '../../store/states/investigations'
+import { selectInvestigations } from '../../store/states/investigations'
 import { theme } from '../theme'
+import { useEffect, useState } from 'react'
+
+function getSelectedId() {
+    debugger
+    const path = window.location.pathname
+    if (path.indexOf('/onderzoek/') === -1) return ''
+
+    return path.substring('/onderzoek/'.length)
+}
 
 export function SideBarOrganism() {
     const investigations = useSelector(selectInvestigations)
+    const [viewId, setViewId] = useState(getSelectedId())
 
+    useEffect(() => {
+        setViewId(getSelectedId());
+    }, [window.location.pathname])
+
+    debugger;
+    
     return (
         <Container
             direction="vertical"
@@ -47,13 +61,10 @@ export function SideBarOrganism() {
                     (investigation: InvestigationViewModel) => (
                         <InvestigationListItem
                             processed={!!investigation.summary}
-                            key={investigation.identifier}
+                            key={investigation.id}
                             text={investigation.title}
-                            id={investigation.identifier}
-                            selected={investigation.identifier === investigations.viewId}
-                            onClick={() => {}
-                                //dispatch(setViewId(investigation.identifier))
-                            }
+                            id={investigation.id}
+                            selected={`${investigation.id}` === viewId}
                         />
                     )
                 )}

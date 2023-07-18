@@ -5,35 +5,38 @@ import { Container } from '@mui/material'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 import { InvestigationViewModel } from '../../types/Investigations'
+import { useParams } from 'react-router-dom'
 
 let timeout: any
 const createTimeMessage = (investigation?: InvestigationViewModel) =>
-    investigation
-        ? moment(investigation.summary?.createdAt).fromNow()
-        : 'Vewerken...'
+    investigation ? moment(investigation.created_at).fromNow() : 'Vewerken...'
 
 export function SummaryOrganism() {
-    const { viewId, data } = useSelector(selectInvestigations)
-    const findInvestigation = () => data.find((i) => i.identifier === viewId)
+    const { data } = useSelector(selectInvestigations)
+    const { id } = useParams()
+
+    const findInvestigation = () => data.find((i) => `${i.id}` === `${id}`)
     const investigation = findInvestigation()
     const [timeMsg, setTimeMsg] = useState(createTimeMessage(investigation))
 
     useEffect(() => {
-        timeout = setTimeout(() =>
-            setTimeMsg(createTimeMessage(findInvestigation())),
+        timeout = setTimeout(
+            () => setTimeMsg(createTimeMessage(findInvestigation())),
             1000
         )
-        return () => clearTimeout(timeout);
+        return () => clearTimeout(timeout)
     }, [timeMsg])
 
     useEffect(() => {
-        setTimeMsg(createTimeMessage(findInvestigation()));
-    }, [viewId])
+        setTimeMsg(createTimeMessage(findInvestigation()))
+    }, [id])
 
     if (!investigation) return
 
     const title = investigation.title ?? 'Samenvatten...'
-    const summary = investigation.summary;
+    const summary = investigation.summary
+
+    debugger
 
     return (
         <Container

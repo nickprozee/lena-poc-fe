@@ -38,8 +38,6 @@ module.exports = function (req, res, next) {
             '/summarize/'.length + 4
         )
 
-        console.log('REQUEST ID: ' + request_id)
-
         const summarize_processed = processed.some((p) => p === request_id)
 
         if (!summarize_processed) {
