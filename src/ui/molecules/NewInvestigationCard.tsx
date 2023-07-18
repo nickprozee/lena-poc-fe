@@ -47,7 +47,8 @@ export function NewInvestigationCard(props: {
                     <Typography variant="overline" pb={1}>
                         {files.length} Bestanden
                     </Typography>
-                    <UploadMolecule
+                    <UploadMolecule 
+                        fileTypes={["PDF", "DOCX"]}
                         onUpload={onAddFiles}
                         message="Sleep uw bestand(en) of klik hier"
                     />

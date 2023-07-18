@@ -1,8 +1,11 @@
-let id = Math.floor(Math.random() * 1000001)
+const getMockText = async () => {
+    const result = await fetch(
+        'https://baconipsum.com/api/?type=all-meat&sentences=20&start-with-lorem=1'
+    ).then((r) => r.json())
+    const mockMessage = result[0]
 
-const processed = ['']
-const mockMessage =
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."
+    return `${mockMessage}\r\n\r\n${mockMessage}\r\n\r\n\r\nKind Regards, \r\n\r\nLena.`
+}
 
 module.exports = function (req, res, next) {
     const METHOD = req.method
@@ -26,9 +29,10 @@ module.exports = function (req, res, next) {
                 () =>
                     fetch(`http://localhost:4000/investigations`)
                         .then((r) => r.json())
-                        .then((investigations) => {
+                        .then(async (investigations) => {
                             const index = investigations.length - 1
                             const id = investigations[index].id
+                            const text = await getMockText()
 
                             fetch(
                                 `http://localhost:4000/investigations/summarize`,
@@ -39,7 +43,7 @@ module.exports = function (req, res, next) {
                                     }),
                                     body: JSON.stringify({
                                         id: id,
-                                        summary: `${mockMessage}\r\n\r\n${mockMessage}\r\n\r\n${mockMessage}`,
+                                        summary: text,
                                         created_at: new Date(
                                             Date.now()
                                         ).toJSON(),
