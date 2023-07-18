@@ -23,7 +23,7 @@ export function AddInvestigationOrganism() {
     }
 
     return (
-        <MuiContainer maxWidth="lg" sx={{ p: 3, height: '100%', display: 'flex' }}>
+        <MuiContainer maxWidth="lg" sx={{ p: 3, maxHeight: '100%', display: 'flex' }}>
             <NewInvestigationCard
                 disabled={title.length === 0}
                 files={selectedFiles}

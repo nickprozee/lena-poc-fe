@@ -19,11 +19,11 @@ export function FileListMolecule(props: Props) {
     const getSize = (f: File) => {
         let size = f.size / 1000
 
-        if (size < 1000) return `${Math.round(size)}kb`
+        if (size < 1000) return `${Math.round(size)} kb`
 
         size = size / 1000
 
-        return `${Math.round(size)}mb`
+        return `${Math.round(size)} mb`
     }
 
     return (
