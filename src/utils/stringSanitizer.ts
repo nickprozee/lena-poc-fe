@@ -51,3 +51,13 @@ export const removeLeadingUnderscores = (s: string) => {
 
     return s
 }
+
+export const getSizeString = (f: File) => {
+    let size = f.size / 1000
+
+    if (size < 1000) return `${Math.round(size)} kb`
+
+    size = size / 1000
+
+    return `${Math.round(size)} mb`
+}

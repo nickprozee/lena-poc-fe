@@ -9,6 +9,7 @@ import {
     DeleteOutline as DeleteIcon,
     DocumentScannerOutlined as FolderIcon,
 } from '@mui/icons-material'
+import { getSizeString } from '../../utils/stringSanitizer'
 
 interface Props {
     files: File[]
@@ -16,16 +17,6 @@ interface Props {
 }
 
 export function FileListMolecule(props: Props) {
-    const getSize = (f: File) => {
-        let size = f.size / 1000
-
-        if (size < 1000) return `${Math.round(size)} kb`
-
-        size = size / 1000
-
-        return `${Math.round(size)} mb`
-    }
-
     return (
         <List dense>
             {props.files.map((f) => (
@@ -44,7 +35,7 @@ export function FileListMolecule(props: Props) {
                     </ListItemAvatar>
                     <ListItemText
                         primary={f.name}
-                        secondary={getSize(f)}
+                        secondary={getSizeString(f)}
                     />
                 </ListItem>
             ))}
