@@ -23,13 +23,13 @@ export const removeExtension = (fileName: string) => {
 
 export const sanitizeApiEndpoint = (
     apiEndpoint: string,
-    controller: string,
+    controller?: string,
     id?: string,
     query?: string
 ) => {
     
     const sanitizedApiEndpoint = ensureNoSlash(apiEndpoint)
-    const sanitizedController = ensureNoSlash(controller)
+    const sanitizedController = ensureNoSlash(controller ?? '')
     let url = ''
 
     if (id) url = `${sanitizedApiEndpoint}/${id}/${sanitizedController}`

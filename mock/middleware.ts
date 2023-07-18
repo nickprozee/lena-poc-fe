@@ -9,17 +9,24 @@ module.exports = function (req, res, next) {
     const PATH = req.path
 
     const MethodNotAllowed = () => res.status(405).send()
+    const Accepted = () => res.status(204).send()
     const ProcessingSummarize = () => res.status(202).send()
 
     if (PATH === '/investigations') {
+        if (METHOD === 'PATCH') return next()
         if (METHOD !== 'POST' && METHOD !== 'PUT') return MethodNotAllowed()
 
-        req.body = { id, status: 'CREATED' }
+        req.body = {
+            identifier: id,
+            summary: `${mockMessage}\r\n\r\n${mockMessage}\r\n\r\n${mockMessage}`,
+            created_at: new Date(Date.now()).toJSON(),
+            updated_at: new Date(Date.now()).toJSON(),
+        }
+
         id++
     }
 
-    if (PATH.indexOf('/upload') > -1 && METHOD !== 'PUT')
-        return MethodNotAllowed()
+    if (PATH.indexOf('/upload') > -1 && METHOD === 'PUT') return Accepted()
 
     if (PATH.indexOf('/summarize/') > -1) {
         if (METHOD !== 'GET' && METHOD !== 'POST') return MethodNotAllowed()
@@ -44,9 +51,10 @@ module.exports = function (req, res, next) {
                     'Content-type': 'application/json',
                 }),
                 body: JSON.stringify({
-                    id: parseInt(request_id),
+                    identifier: parseInt(request_id),
                     summary: `${mockMessage}\r\n\r\n${mockMessage}\r\n\r\n${mockMessage}`,
-                    createdAt: new Date(Date.now()).toJSON()
+                    created_at: new Date(Date.now()).toJSON(),
+                    updated_at: new Date(Date.now()).toJSON(),
                 }),
             })
 

@@ -14,7 +14,7 @@ const createTimeMessage = (investigation?: InvestigationViewModel) =>
 
 export function SummaryOrganism() {
     const { viewId, data } = useSelector(selectInvestigations)
-    const findInvestigation = () => data.find((i) => i.id === viewId)
+    const findInvestigation = () => data.find((i) => i.identifier === viewId)
     const investigation = findInvestigation()
     const [timeMsg, setTimeMsg] = useState(createTimeMessage(investigation))
 

@@ -15,28 +15,29 @@ const initialState: State = {
     files: [],
 }
 
-interface CreateInvestigationProps {
-    args: File[]
-    name: string
-}
-
 const createInvestigation = createAsyncThunk(
     'investigations/start',
-    async ({ args, name }: CreateInvestigationProps, thunkApi) => {
-        const { id } = await investigationsApi.create()
+    async (
+        args: {
+            files: File[]
+            name: string
+        },
+        thunkApi
+    ) => {
+        debugger
+        const result = await investigationsApi.create()
+        const { files, name } = args
+        const { identifier: id } = result
 
         thunkApi.dispatch(
             investigationsSlice.actions.addInvestigation({
-                id,
-                title: name || args[0].name,
+                ...result,
+                title: name,
                 state: 'PROCESSING',
             })
         )
 
-        thunkApi.dispatch(investigationsSlice.actions.setViewId(id))
-        thunkApi.dispatch(investigationsSlice.actions.clearFiles())
-
-        await investigationsApi.uploadDocuments(id, args)
+        await investigationsApi.summarize(id, files)
         await thunkApi.dispatch(fetchUntilProcessed(id))
     }
 )
@@ -48,7 +49,7 @@ const fetchUntilProcessed = createAsyncThunk(
 
         const state: RootState = thunkApi.getState() as RootState
         const result = state.investigations.data.some(
-            (i) => i.id === id && i.state === 'PROCESSED'
+            (i) => i.identifier === id && i.state === 'PROCESSED'
         )
 
         console.log(`RESULT FOR ${id}: `, result)
@@ -63,18 +64,18 @@ const fetchUntilProcessed = createAsyncThunk(
 const fetchInvestigation = createAsyncThunk(
     'investigations/fetch',
     async (id: string, thunkApi) => {
-        const response = await investigationsApi.summarize(id)
+        const response = await investigationsApi.getSummary(id)
         if (!response?.summary) return
 
         //@ts-expect-error
         const state: State = thunkApi.getState().investigations
-        const investigation = state.data.find((i) => i.id === id)
+        const investigation = state.data.find((i) => i.identifier === id)
 
         if (!investigation) return
 
         thunkApi.dispatch(
             investigationsSlice.actions.updateInvestigation({
-                id,
+                ...investigation,
                 state: 'PROCESSED',
                 title: investigation.title,
                 summary: response,
@@ -83,9 +84,29 @@ const fetchInvestigation = createAsyncThunk(
     }
 )
 
+const fetchInvestigations = createAsyncThunk(
+    'investigations/list',
+    async () => {
+        const response = await investigationsApi.list()
+        return response.map(
+            (i) =>
+                ({
+                    ...i,
+                    state: 'PROCESSING',
+                    title: 'UKNOWN TITLE',
+                } as InvestigationViewModel)
+        )
+    }
+)
+
 export const investigationsSlice = createSlice({
     name: 'investigations',
     initialState,
+    extraReducers(builder) {
+        builder.addCase(fetchInvestigations.fulfilled, (state, action) => {
+            state.data = action.payload
+        })
+    },
     reducers: {
         addInvestigation: (
             state,
@@ -99,40 +120,17 @@ export const investigationsSlice = createSlice({
             action: PayloadAction<InvestigationViewModel>
         ) => {
             const index = state.data.findIndex(
-                (inv) => inv.id === action.payload.id
+                (inv) => inv.identifier === action.payload.identifier
             )
 
             if (index === -1) return
 
             state.data[index] = action.payload
-        },
-
-        clearViewId: (state) => {
-            state.viewId = undefined
-        },
-
-        setViewId: (state, action: PayloadAction<string>) => {
-            state.viewId = action.payload
-        },
-
-        setFiles: (state, action: PayloadAction<File[]>) => {
-            state.files = action.payload
-        },
-        deleteFile: (state, action: PayloadAction<number>) => {
-            const index = action.payload
-            const filesArray = Array.from(state.files)
-            filesArray.splice(index, 1)
-            state.files = filesArray
-        },
-        clearFiles: (state) => {
-            state.files = []
-        },
+        }       
     },
 })
 
-export { createInvestigation }
-export const { setViewId, clearViewId, setFiles, deleteFile, clearFiles } =
-    investigationsSlice.actions
+export { createInvestigation, fetchInvestigations }
 export const selectInvestigations = (state: RootState): State =>
     state.investigations
 export default investigationsSlice.reducer

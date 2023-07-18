@@ -30,10 +30,14 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
     "json-server": "^0.17.3",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
     "moment": "^2.29.4",
     "react-drag-drop-files": "^2.3.10",
     "react-redux": "^8.1.1",
+    "react-router-dom": "^6.14.2",
     "react-type-animation": "^3.1.0",
+    "sort-by": "^1.2.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
   }

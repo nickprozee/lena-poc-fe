@@ -22,7 +22,8 @@ export function UploadArea(props: Props) {
                         outline: 'none',
                     },
                 },
-            }}>
+            }}
+            >
             <FileUploader
                 multiple={true}
                 handleChange={props.onUpload}

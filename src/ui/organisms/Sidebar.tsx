@@ -1,29 +1,17 @@
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { getAsset } from '../../utils/assetHelper'
 import { Image, Container } from '../atoms'
-import { InvestigationListItem } from '../molecules'
+import { InvestigationListItem, NewInvestigationListItem } from '../molecules'
 import { List, ListSubheader } from '@mui/material'
 import { InvestigationViewModel } from '../../types/Investigations'
 import {
-    clearViewId,
-    selectInvestigations,
-    setFiles,
-    setViewId,
+    selectInvestigations
 } from '../../store/states/investigations'
-import { UploadMolecule } from '../molecules/Upload'
-import { useAppDispatch } from '../../store'
 import { theme } from '../theme'
 
 export function SideBarOrganism() {
     const investigations = useSelector(selectInvestigations)
-    const dispatch = useAppDispatch()
-
-    const handleSetFiles = (files: File[]) => {
-        if (files.length) {
-            dispatch(setFiles(files))
-            dispatch(clearViewId())
-        }
-    }
 
     return (
         <Container
@@ -48,25 +36,23 @@ export function SideBarOrganism() {
             </Container>
             <ListSubheader>LENA 0.1</ListSubheader>
 
-            <UploadMolecule
-                fileTypes={['DOCX', 'PDF']}
-                onUpload={(files) => handleSetFiles(files)}
-            />
+            <Link to={'/nieuw-onderzoek'} style={{ textDecoration: 'none' }}>
+                <NewInvestigationListItem />
+            </Link>
 
             <List sx={{ pt: 0, mt: 2, overflow: 'auto' }}>
                 <ListSubheader>Samenvattingen</ListSubheader>
+
                 {investigations.data.map(
                     (investigation: InvestigationViewModel) => (
                         <InvestigationListItem
                             processed={!!investigation.summary}
-                            key={investigation.id}
+                            key={investigation.identifier}
                             text={investigation.title}
-                            id={investigation.id}
-                            selected={
-                                investigation.id === investigations.viewId
-                            }
-                            onClick={() =>
-                                dispatch(setViewId(investigation.id))
+                            id={investigation.identifier}
+                            selected={investigation.identifier === investigations.viewId}
+                            onClick={() => {}
+                                //dispatch(setViewId(investigation.identifier))
                             }
                         />
                     )

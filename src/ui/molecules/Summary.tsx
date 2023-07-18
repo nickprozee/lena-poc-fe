@@ -1,33 +1,6 @@
-import { Card, CardContent, Skeleton, Typography } from '@mui/material'
-import { ReactNode, useState } from 'react'
+import { Skeleton } from '@mui/material'
 import { TypeAnimation } from 'react-type-animation'
-
-function SummaryCard(props: {
-    children: ReactNode
-    title: string
-    createdAt: string
-}) {
-    const { createdAt } = props
-    const capitalized = createdAt.charAt(0).toUpperCase()
-    const timeMsg = `${capitalized}${createdAt.slice(1)}`
-
-    return (
-        <Card sx={{ p: 5 }} elevation={0}>
-            <Typography
-                gutterBottom
-                variant="h4"
-                component="div"
-                color="primary">
-                {props.title}
-            </Typography>
-
-            <Typography gutterBottom variant="caption" color="gray">
-                {timeMsg}
-            </Typography>
-            <CardContent>{props.children}</CardContent>
-        </Card>
-    )
-}
+import { SummaryCard } from '.'
 
 function SkeletonSection(props: { rows: number; width?: number | string }) {
     const rows = []
@@ -57,17 +30,10 @@ function mergeSections(originalArray: string[]): string[] {
 }
 
 export function TypeWriter(props: { sections: string[] }) {
-    const [showSections, setShowSections] = useState(0)
-
-    // useEffect(() => {
-    //     setTimeout(() => setShowSections(showSections + 1), 2000);
-    // }, [showSections])
-
     return (
         <>
             {props.sections
-                .filter((_, index) => index <= showSections)
-                .map((item, index) => (
+                .map((item) => (
                     <>
                         <TypeAnimation
                             onEnded={() => alert('FINISHED')}

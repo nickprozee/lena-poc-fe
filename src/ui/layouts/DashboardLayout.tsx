@@ -20,7 +20,7 @@ export function DashboardLayout(props: Props) {
             <Container sx={{ width: 400 }}>{props.sideBar}</Container>
 
             {/** Content */}
-            <Container sx={{ px: '0rem !important', flex: 1 }}>
+            <Container sx={{ px: '0rem !important', flex: 1, overflow: 'hidden' }}>
                 {props.content}
             </Container>
         </Container>

@@ -1,5 +1,3 @@
-export { ContentViewOrganism } from './ContentView'
 export { SideBarOrganism } from './Sidebar'
 export { SummaryOrganism } from './Summary'
-export { UploadDocumentOrganism } from './UploadDocument'
-export { FileSelectionOrganism } from './FileSelection'
+export { AddInvestigationOrganism } from './AddInvestigation'

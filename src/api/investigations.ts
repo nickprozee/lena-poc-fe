@@ -12,27 +12,40 @@ class Api extends BaseClient {
         )
     }
 
-    uploadDocuments = async (id: string, files: File[]) => {
+    list = async (): Promise<Investigation[]> => {
+        const { json } = await this.api<Investigation[]>(
+            undefined,
+            undefined,
+            'GET'
+        )
+        return json ?? []
+    }
+
+    summarize = async (id: string, files: File[]) => {
         const body = new FormData()
 
-        for (let file in files) body.append('document', file)
+        for (let file in files) body.append('documents', file)
 
         const { response } = await this.api('upload', id, 'PUT', body)
         return response
     }
 
-    summarize = async (id: string): Promise<Summary | undefined> => {
+    getSummary = async (id: string): Promise<Summary | undefined> => {
         const { json } = await this.api<Summary>('summarize', id, 'GET')
 
         return json
     }
 
     create = async (): Promise<Investigation> => {
-        const { json } = await this.api<Investigation>(
-            '',
-            undefined,
-            'POST'
-        )
+        const { json } = await this.api<Investigation>('', undefined, 'POST')
+        return json as Investigation
+    }
+
+    updateTitle = async (id: string, title: string): Promise<Investigation> => {
+        const { json } = await this.api<Investigation>('', id, 'PATCH', {
+            title
+        });
+        
         return json as Investigation
     }
 }

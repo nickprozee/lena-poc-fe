@@ -10,9 +10,9 @@ export abstract class BaseClient {
     }
 
     protected api = <T>(
-        controller: string,
+        controller?: string,
         id?: string,
-        method?: 'GET' | 'POST' | 'PUT' | 'DELETE',
+        method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
         body?: any,
         queryParams?: string,
         headers?: { key: string; value: string }[]

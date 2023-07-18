@@ -1,3 +1,7 @@
 export { UploadMolecule } from './Upload'
 export { InvestigationListItem } from './InvestigationListItem'
+export { NewInvestigationListItem } from './NewInvestigationListItem'
 export { ChatInputMolecule } from './ChatInput'
+export { FileListMolecule } from './FileList'
+export { SummaryCard } from './SummaryCard'
+export { NewInvestigationCard } from './NewInvestigationCard'
