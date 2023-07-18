@@ -1,6 +1,4 @@
-import { BaseProps } from "./BaseProps";
-
-export interface Summary extends BaseProps
-{
-    summary: string;
+export interface Summary {
+    id: string
+    summary: string
 }

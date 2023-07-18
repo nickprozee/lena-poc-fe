@@ -16,6 +16,12 @@ module.exports = function (req, res, next) {
         if (METHOD !== 'POST' && METHOD !== 'PUT') return MethodNotAllowed()
 
         if (METHOD === 'POST') {
+            let body = {
+                created_at: new Date().toJSON(),
+                updated_at: new Date().toJSON(),
+            }
+            req.body = body
+
             setTimeout(
                 () =>
                     fetch(`http://localhost:4000/investigations`)

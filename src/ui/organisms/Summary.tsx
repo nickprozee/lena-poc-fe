@@ -8,8 +8,11 @@ import { InvestigationViewModel } from '../../types/Investigations'
 import { useParams } from 'react-router-dom'
 
 let timeout: any
-const createTimeMessage = (investigation?: InvestigationViewModel) =>
-    investigation ? moment(investigation.created_at).fromNow() : 'Verwerken...'
+const createTimeMessage = (investigation?: InvestigationViewModel) => {
+    return investigation
+        ? moment(investigation.created_at).fromNow()
+        : 'Verwerken...'
+}
 
 export function SummaryOrganism() {
     const { data } = useSelector(selectInvestigations)
@@ -18,14 +21,16 @@ export function SummaryOrganism() {
     const findInvestigation = () => data.find((i) => `${i.id}` === `${id}`)
     const investigation = findInvestigation()
     const [timeMsg, setTimeMsg] = useState(createTimeMessage(investigation))
+    const [toggler, setToggler] = useState(false)
 
     useEffect(() => {
-        timeout = setTimeout(
-            () => setTimeMsg(createTimeMessage(findInvestigation())),
-            1000
-        )
+        timeout = setTimeout(() => {
+            const msg = createTimeMessage(findInvestigation())
+            setTimeMsg(msg)
+            setToggler(!toggler)
+        }, 30 * 1000) 
         return () => clearTimeout(timeout)
-    }, [timeMsg])
+    }, [toggler])
 
     useEffect(() => {
         setTimeMsg(createTimeMessage(findInvestigation()))
