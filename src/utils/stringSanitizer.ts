@@ -46,8 +46,8 @@ export const capitalizeFirstLetter = (s: string) => {
     return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-export const removeLeadingUnderscores = (s: string) => {
-    if (s.indexOf('_') === 0) return s.substring(1)
+export const removeLeadingUnderscores = (s: string): string => {
+    if (s.indexOf('_') === 0) return removeLeadingUnderscores(s.substring(1))
 
     return s
 }
