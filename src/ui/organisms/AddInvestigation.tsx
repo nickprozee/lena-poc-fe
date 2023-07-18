@@ -16,6 +16,7 @@ export function AddInvestigationOrganism() {
     const onSelectFiles = (f: File[]) => {
         const newFiles = [...selectedFiles.concat(Array.from(f))]
         setSelectedFiles(newFiles)
+        if (title.length === 0) setTitle(newFiles[0].name)
     }
 
     const onRemoveFile = (f: File) => {
@@ -27,7 +28,7 @@ export function AddInvestigationOrganism() {
         const result = await dispatch(
             createInvestigation({
                 files: selectedFiles,
-                name: title
+                name: title,
             })
         )
 

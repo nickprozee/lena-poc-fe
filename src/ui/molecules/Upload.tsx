@@ -15,22 +15,22 @@ interface Props {
 
 export function UploadArea(props: Props) {
     return (
-        <Container
-            sx={{
-                label: {
-                    ':focus-within': {
-                        outline: 'none',
+        <FileUploader
+            multiple={true}
+            handleChange={props.onUpload}
+            types={props.fileTypes}>
+            <Container
+                sx={{
+                    label: {
+                        ':focus-within': {
+                            outline: 'none',
+                        },
                     },
-                },
-            }}
-            >
-            <FileUploader
-                multiple={true}
-                handleChange={props.onUpload}
-                types={props.fileTypes}>
+                    background: theme.palette.grey[200]
+                }}>
                 {props.children}
-            </FileUploader>
-        </Container>
+            </Container>
+        </FileUploader>
     )
 }
 
@@ -41,7 +41,6 @@ export function UploadMolecule(props: Props) {
                 sx={{
                     p: 0,
                     borderRadius: 1,
-                    background: theme.palette.grey[200],
                 }}>
                 <Container
                     direction="horizontal"

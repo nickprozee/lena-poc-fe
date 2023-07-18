@@ -40,6 +40,8 @@ export const sanitizeApiEndpoint = (
     return url
 }
 
+export const ellipsis = (value:string, maxLength: number) => value.length > maxLength ? value.substring(0, maxLength - 3) + "..." : value;
+
 export const capitalizeFirstLetter = (s: string) => {
     if (!s) return ''
 

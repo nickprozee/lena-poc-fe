@@ -38,7 +38,7 @@ export function SummaryOrganism() {
 
     if (!investigation) return
 
-    const title = investigation.title ?? 'Samenvatten...'
+    const title = investigation.title ?? investigation.id
     const summary = investigation.summary
 
     return (
@@ -46,6 +46,7 @@ export function SummaryOrganism() {
             sx={{
                 flexDirection: 'column',
                 mt: 2,
+                overflow: 'auto'
             }}>
             {summary ? (
                 <Summary

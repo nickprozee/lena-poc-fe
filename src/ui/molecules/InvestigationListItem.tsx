@@ -2,6 +2,7 @@ import { CircularProgress, ListItemButton } from '@mui/material'
 import { Text } from '../atoms'
 import CompletedIcon from '@mui/icons-material/DocumentScannerTwoTone'
 import { Link } from 'react-router-dom'
+import { ellipsis } from '../../utils/stringSanitizer'
 
 interface Props {
     text?: string
@@ -25,7 +26,7 @@ export function InvestigationListItem(props: Props) {
                 ) : (
                     <CircularProgress size={'1rem'} sx={{ mr: 1 }} />
                 )}
-                <Text size="subtitle" value={props.text ?? props.id} />
+                <Text size="subtitle" value={ellipsis(props.text ?? props.id, 40)} />
             </ListItemButton>
         </Link>
     )
