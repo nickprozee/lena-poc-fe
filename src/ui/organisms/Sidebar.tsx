@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { getAsset } from '../../utils/assetHelper'
 import { Image, Container } from '../atoms'
 import { InvestigationListItem, NewInvestigationListItem } from '../molecules'
@@ -7,11 +6,9 @@ import { List, ListSubheader } from '@mui/material'
 import { InvestigationViewModel } from '../../types/Investigations'
 import { selectInvestigations } from '../../store/states/investigations'
 import { theme } from '../theme'
-import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
-function getSelectedId() {
-    debugger
-    const path = window.location.pathname
+function getSelectedId(path: string) {
     if (path.indexOf('/onderzoek/') === -1) return ''
 
     return path.substring('/onderzoek/'.length)
@@ -19,14 +16,9 @@ function getSelectedId() {
 
 export function SideBarOrganism() {
     const investigations = useSelector(selectInvestigations)
-    const [viewId, setViewId] = useState(getSelectedId())
+    const location = useLocation()
+    const id = getSelectedId(location.pathname)
 
-    useEffect(() => {
-        setViewId(getSelectedId());
-    }, [window.location.pathname])
-
-    debugger;
-    
     return (
         <Container
             direction="vertical"
@@ -50,9 +42,7 @@ export function SideBarOrganism() {
             </Container>
             <ListSubheader>LENA 0.1</ListSubheader>
 
-            <Link to={'/nieuw-onderzoek'} style={{ textDecoration: 'none' }}>
-                <NewInvestigationListItem />
-            </Link>
+            <NewInvestigationListItem />
 
             <List sx={{ pt: 0, mt: 2, overflow: 'auto' }}>
                 <ListSubheader>Samenvattingen</ListSubheader>
@@ -64,7 +54,7 @@ export function SideBarOrganism() {
                             key={investigation.id}
                             text={investigation.title}
                             id={investigation.id}
-                            selected={`${investigation.id}` === viewId}
+                            selected={`${investigation.id}` === id}
                         />
                     )
                 )}

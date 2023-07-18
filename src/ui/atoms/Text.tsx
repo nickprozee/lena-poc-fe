@@ -23,6 +23,7 @@ export function Text(props: Props) {
             sx={{
                 maxWidth: '100%',
                 overflow: 'hidden',
+                whiteSpace: 'pre-line',
                 ...props.sx,
             }}
             textOverflow={'ellipsis'}

@@ -33,7 +33,7 @@ export const sanitizeApiEndpoint = (
     let url = ''
 
     if (id) url = `${sanitizedApiEndpoint}/${id}/${sanitizedController}`
-    else url = `${sanitizedApiEndpoint}/${sanitizedController}`
+    else url = sanitizedController.length ? `${sanitizedApiEndpoint}/${sanitizedController}` : sanitizedApiEndpoint
 
     if (query) url += `?${query}`
 

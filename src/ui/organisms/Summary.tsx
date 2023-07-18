@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom'
 
 let timeout: any
 const createTimeMessage = (investigation?: InvestigationViewModel) =>
-    investigation ? moment(investigation.created_at).fromNow() : 'Vewerken...'
+    investigation ? moment(investigation.created_at).fromNow() : 'Verwerken...'
 
 export function SummaryOrganism() {
     const { data } = useSelector(selectInvestigations)
@@ -35,8 +35,6 @@ export function SummaryOrganism() {
 
     const title = investigation.title ?? 'Samenvatten...'
     const summary = investigation.summary
-
-    debugger
 
     return (
         <Container

@@ -42,7 +42,7 @@ class Api extends BaseClient {
     }
 
     updateTitle = async (id: string, title: string): Promise<Investigation> => {
-        const { json } = await this.api<Investigation>('', id, 'PATCH', {
+        const { json } = await this.api<Investigation>(undefined, id, 'PATCH', {
             title
         });
         

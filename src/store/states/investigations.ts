@@ -3,15 +3,12 @@ import { InvestigationViewModel } from '../../types/Investigations'
 import { investigationsApi } from '../../api/investigations'
 import { RootState } from '..'
 import { delay } from '../../utils/delay'
-
 interface State {
     data: InvestigationViewModel[]
-    files: File[]
 }
 
 const initialState: State = {
-    data: [],
-    files: [],
+    data: []
 }
 
 const createInvestigation = createAsyncThunk(
@@ -23,11 +20,8 @@ const createInvestigation = createAsyncThunk(
         },
         thunkApi
     ) => {
-        debugger
         const { files, name } = args
         const result = await investigationsApi.create()
-
-        debugger
         const { id } = result
 
         await investigationsApi.updateTitle(result.id, name)
@@ -40,11 +34,10 @@ const createInvestigation = createAsyncThunk(
             })
         )
 
-        window.location.pathname = "/onderzoek/" + id;
-
         await investigationsApi.summarize(id, files)
-        await thunkApi.dispatch(fetchUntilProcessed(id))
+        thunkApi.dispatch(fetchUntilProcessed(id))
 
+        return result
     }
 )
 
@@ -122,7 +115,7 @@ export const investigationsSlice = createSlice({
             state,
             action: PayloadAction<InvestigationViewModel>
         ) => {
-            state.data.push(action.payload)
+            state.data.push(action.payload);    
         },
 
         updateInvestigation: (
