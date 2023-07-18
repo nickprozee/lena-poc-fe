@@ -27,7 +27,7 @@ export function AddInvestigationOrganism() {
         const result = await dispatch(
             createInvestigation({
                 files: selectedFiles,
-                name: title,
+                name: title
             })
         )
 
