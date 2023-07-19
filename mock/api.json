@@ -1,18 +1,4 @@
 {
-  "investigations": [
-    {
-      "created_at": "2023-07-18T19:26:16.715Z",
-      "updated_at": "2023-07-18T19:26:16.715Z",
-      "id": 1,
-      "title": "Onderzoek 001"
-    }
-  ],
-  "summarize": [
-    {
-      "id": 1,
-      "summary": "Bacon ipsum dolor amet biltong porchetta alcatra capicola jerky ground round pig turkey corned beef meatball leberkas. Pork belly turducken shank short ribs, tail jowl filet mignon frankfurter beef fatback capicola pancetta venison shoulder. Frankfurter beef jowl hamburger. Sausage pork loin bresaola chicken, pancetta jowl boudin tail chuck jerky hamburger bacon filet mignon. Swine chicken turkey shank pastrami short ribs landjaeger spare ribs tail corned beef. Corned beef beef kielbasa beef ribs filet mignon, sausage ham brisket biltong venison cupim tail fatback alcatra. Pork chop ground round turkey beef shankle picanha venison rump chicken. Flank leberkas tongue, tail bacon beef filet mignon sausage pork loin turkey. Tongue ham spare ribs porchetta picanha jerky. Tail capicola turkey buffalo. Porchetta pork chop ground round, strip steak ham capicola pig tenderloin biltong turducken doner buffalo short ribs kevin sirloin. Cupim brisket shankle meatball picanha. Burgdoggen ribeye kielbasa sausage chicken. Beef shankle turducken prosciutto chicken sirloin shoulder short loin. Frankfurter pork ham hock, shoulder picanha chislic tongue doner tenderloin. Kevin frankfurter turkey tenderloin prosciutto chicken landjaeger pork t-bone shank ham salami filet mignon pancetta flank. Tongue pig cupim rump landjaeger strip steak. Ham ground round flank, pastrami shoulder porchetta beef ribs spare ribs buffalo tail venison strip steak rump salami ball tip. Bresaola ribeye landjaeger short ribs jerky. Tail bresaola meatball landjaeger ground round fatback, chicken venison pastrami tenderloin alcatra cow.\r\n\r\nBacon ipsum dolor amet biltong porchetta alcatra capicola jerky ground round pig turkey corned beef meatball leberkas. Pork belly turducken shank short ribs, tail jowl filet mignon frankfurter beef fatback capicola pancetta venison shoulder. Frankfurter beef jowl hamburger. Sausage pork loin bresaola chicken, pancetta jowl boudin tail chuck jerky hamburger bacon filet mignon. Swine chicken turkey shank pastrami short ribs landjaeger spare ribs tail corned beef. Corned beef beef kielbasa beef ribs filet mignon, sausage ham brisket biltong venison cupim tail fatback alcatra. Pork chop ground round turkey beef shankle picanha venison rump chicken. Flank leberkas tongue, tail bacon beef filet mignon sausage pork loin turkey. Tongue ham spare ribs porchetta picanha jerky. Tail capicola turkey buffalo. Porchetta pork chop ground round, strip steak ham capicola pig tenderloin biltong turducken doner buffalo short ribs kevin sirloin. Cupim brisket shankle meatball picanha. Burgdoggen ribeye kielbasa sausage chicken. Beef shankle turducken prosciutto chicken sirloin shoulder short loin. Frankfurter pork ham hock, shoulder picanha chislic tongue doner tenderloin. Kevin frankfurter turkey tenderloin prosciutto chicken landjaeger pork t-bone shank ham salami filet mignon pancetta flank. Tongue pig cupim rump landjaeger strip steak. Ham ground round flank, pastrami shoulder porchetta beef ribs spare ribs buffalo tail venison strip steak rump salami ball tip. Bresaola ribeye landjaeger short ribs jerky. Tail bresaola meatball landjaeger ground round fatback, chicken venison pastrami tenderloin alcatra cow.\r\n\r\n\r\nKind Regards, \r\n\r\n\r\nLena.",
-      "created_at": "2023-07-18T19:26:21.049Z",
-      "updated_at": "2023-07-18T19:26:21.049Z"
-    }
-  ]
+  "investigations": [],
+  "summarize": []
 }

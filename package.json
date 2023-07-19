@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "clear-api": "cp ./mock/api_empty.json ./mock/api.json",
+    "resetdb": "cp ./mock/api_empty.json ./mock/api.json",
     "preview": "vite preview",
     "mockapi": "json-server --watch ./mock/api.json --routes ./mock/routes.json --middlewares ./mock/middleware.ts --port 4000"
   },
