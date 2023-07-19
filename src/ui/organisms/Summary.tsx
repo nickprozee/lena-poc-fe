@@ -43,6 +43,7 @@ export function SummaryOrganism() {
 
     return (
         <Container
+            maxWidth="xl"
             sx={{
                 flexDirection: 'column',
                 mt: 2,
